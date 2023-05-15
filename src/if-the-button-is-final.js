@@ -1,6 +1,7 @@
 import { numberOfRows } from "./index"
 import { numberOfBomb } from "./index"
 import { mas } from "./index"
+import { timerId } from "./index"
 export default function ifTheButtonIsFinal() {
 	let b = 0;
 	let d = 0;
@@ -8,6 +9,7 @@ export default function ifTheButtonIsFinal() {
 	for (let i = 0; i < fild1.children.length; i++) {
 		for (let j = 0; j < fild1.children[i].children.length; j++) {
 			if (fild1.children[i].children[j].className == 'button-bomb') {
+				clearInterval(timerId);
 				return
 			}
 			else if (fild1.children[i].children[j].className == 'not-button-bomb') {
@@ -31,6 +33,7 @@ export default function ifTheButtonIsFinal() {
 						b += Number(numberOfRows)
 					}
 					/* conteiner.appendChild(restart)*/
+					clearInterval(timerId);
 					return
 				}
 			}

@@ -9,34 +9,18 @@ export default function openRiteToNumber(event) {
 			else if (event == fild1.children[i].children[j]) {
 				for (let h = i; h < fild1.children.length;) {
 					for (let g = j; g < fild1.children[h].children.length;) {
-						if (fild1.children[h].children[g] == undefined) {
-							if (fild1.children[h + 1].children[g] !== undefined) {
-								j = 0
-								i = i + 1
-							}
+						fild1.children[h].children[g].className = 'not-button-bomb'
+						fild1.children[h].children[g].disabled = true
+						if (openUpFild(fild1.children[h].children[g]) > 0) {
+							g++
 							return
 						}
 						else {
-							if ((fild1.children[h].children.length) == g) {
-								j = 0
-								i = i + 1
+							if (fild1.children[h].children[g + 1] == undefined) {
+								return
 							}
 							else {
-								fild1.children[h].children[g].className = 'not-button-bomb'
-								fild1.children[h].children[g].disabled = true
-								debugger
-								if (openUpFild(fild1.children[h].children[g]) > 0) {
-									g++
-									return
-								}
-								else {
-									if (fild1.children[h].children[g + 1] == undefined) {
-										return
-									}
-									else {
-										g++
-									}
-								}
+								g++
 							}
 						}
 					}

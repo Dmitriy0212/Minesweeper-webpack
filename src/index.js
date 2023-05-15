@@ -16,27 +16,44 @@ let conteiner = document.createElement('div');
 conteiner.className = 'conteiner';
 body.appendChild(conteiner);
 
-export let numberClicks = document.createElement('p');
-numberClicks.textContent = 0;
-conteiner.appendChild(numberClicks)
+let menu = document.createElement('div')
+menu.className = 'menu';
+conteiner.appendChild(menu)
 
 let select = document.createElement('select');
-conteiner.appendChild(select);
+select.className = 'box';
+menu.appendChild(select);
 select.id = 'select'
 let selectSelector = document.querySelector('#select');
 for (let value1 in arr) {
     let option = document.createElement('option');
     option.text = value1;
     option.value = value1;
-    option.selected = true
+    option.selected = false
     selectSelector.appendChild(option);
 }
-selectSelector.value = '';
+
+let boxForNumberClicks = document.createElement('div')
+boxForNumberClicks.className = 'box';
+menu.appendChild(boxForNumberClicks)
+
+export let numberClicks = document.createElement('p');
+numberClicks.textContent = 0;
+boxForNumberClicks.appendChild(numberClicks)
+
+let boxForTimer = document.createElement('div')
+boxForTimer.className = 'box';
+menu.appendChild(boxForTimer)
+
+export let timer = document.createElement('p');
+timer.textContent = 0;
+boxForTimer.appendChild(timer)
 
 let buttonRest = document.createElement('button')
 buttonRest.textContent = String('RESTART')
+buttonRest.className = 'box';
 buttonRest.addEventListener("click", () => {return mas = start(fild, clickButton,numberOfRows,numberOfBomb) })
-conteiner.appendChild(buttonRest)
+menu.appendChild(buttonRest)
 
 let fild = document.createElement('div');
 fild.className = 'fild'
@@ -44,6 +61,7 @@ conteiner.appendChild(fild)
 
 select.addEventListener('change', function () {
     numberClicks.textContent = 0;
+    timer.textContent = 0;
     for (let i = 0; i < fild.children.length;) {
         fild.removeChild(fild.children[i]);
     }
@@ -52,3 +70,12 @@ select.addEventListener('change', function () {
    mas = start(fild, clickButton,numberOfRows,numberOfBomb)
 });
 export let mas =start(fild, clickButton,numberOfRows,numberOfBomb)
+
+export let timerId;
+
+export function timerGame() {
+	timer.textContent = Number(timer.textContent) + Number(1);
+	timerId =setTimeout(() => {
+		return timerGame()
+	}, 1000)
+}

@@ -15,6 +15,24 @@
     width: fit-content;
     height: fit-content;
     flex-direction: column;
+    align-items: stretch;
+}
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.box {
+    width: 24%;
+    color: red;
+    background: black;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid red;
+    border-radius: 4px;
     align-items: center;
 }
 

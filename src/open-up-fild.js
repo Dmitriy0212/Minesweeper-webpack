@@ -2,7 +2,6 @@ import colorNumer from "./switch-case"
 import { mas } from "./index"
 import { numberOfRows } from "./index"
 export default function openUpFild(event) {
-	debugger
 	let c = 0
 	let d = 0
 	let fild1 = document.querySelector('.fild')
@@ -21,7 +20,6 @@ export default function openUpFild(event) {
 						}
 					}
 				}
-
 				else if (event == fild1.children[i].children[0]) {
 					let a = c + j
 					for (let count in mas) {
@@ -34,7 +32,6 @@ export default function openUpFild(event) {
 						}
 					}
 				}
-
 				else if (event !== fild1.children[i].children[0] || event == fild1.children[i].children[fild1.children[i].children.length - 1]) {
 					let a = c + j;
 					for (let count in mas) {
