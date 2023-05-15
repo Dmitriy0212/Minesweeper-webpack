@@ -68,10 +68,15 @@ selectSave.id = 'selectsave'
 export let selecttSaveSelector = document.querySelector('#selectsave');
 
 export let arr2 = []
+
 let objJson2 = JSON.stringify(localStorage);
 let objJson3 = JSON.parse(objJson2);
+
 for (let key in objJson3) {
-    if (JSON.parse(objJson3[key]).save) {
+    if (String(key).includes('Save ')!==true) {
+        continue
+    }
+    else if (String(key).includes('Save ')==true) {
         arr2.push(JSON.parse(objJson3[key]))
     }
 }
@@ -79,7 +84,7 @@ for (let key in objJson3) {
 for (let h = 0; h < selecttSaveSelector.children.length;) {
     selecttSaveSelector.removeChild(selecttSaveSelector.children[h]);
 }
-debugger
+
 arr2.sort(function (a, b) {
     if (a.save.split(' ')[1] > b.save.split(' ')[1]) {
         return 1;
@@ -87,10 +92,8 @@ arr2.sort(function (a, b) {
     if (a.save.split(' ')[1] < b.save.split(' ')[1]) {
         return -1;
     }
-    // a должно быть равным b
     return 0;
 });
-debugger
 
 for (let value1 in arr2) {
     let option = document.createElement('option');

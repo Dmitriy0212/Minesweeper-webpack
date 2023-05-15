@@ -13,7 +13,6 @@ export default function localStorageSave() {
     let fild1 = document.querySelector('.fild')
     for (let i = 0; i < fild1.children.length; i++) {
         for (let j = 0; j < fild1.children[i].children.length; j++) {
-            debugger
             arr1.push(fild1.children[i].children[j].className)
             arr3.push(fild1.children[i].children[j].textContent)
             arr4.push(fild1.children[i].children[j].style.color)
@@ -43,7 +42,10 @@ export default function localStorageSave() {
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
     for (let key in objJson3) {
-        if (JSON.parse(objJson3[key]).save) {
+        if (String(key).includes('Save ')!==true) {
+            continue
+        }
+        else if (String(key).includes('Save ')==true) {
             arr2.push(JSON.parse(objJson3[key]))
         }
     }
@@ -51,7 +53,7 @@ export default function localStorageSave() {
     for (let h = 0; h < selecttSaveSelector.children.length;) {
         selecttSaveSelector.removeChild(selecttSaveSelector.children[h]);
     }
-    debugger
+    
     arr2.sort(function (a, b) {
         if (a.save.split(' ')[1] > b.save.split(' ')[1]) {
             return 1;
@@ -59,10 +61,9 @@ export default function localStorageSave() {
         if (a.save.split(' ')[1] < b.save.split(' ')[1]) {
             return -1;
         }
-        // a должно быть равным b
         return 0;
     });
-    debugger
+
     for (let value1 in arr2) {
         let option = document.createElement('option');
         option.text = arr2[value1].save
