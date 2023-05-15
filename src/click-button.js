@@ -42,7 +42,7 @@ export default function clickButton() {
 							func();
 						}
 					}
-					fild1.children[i].children[j].textContent = 'x'
+					/*fild1.children[i].children[j].textContent = 'x'*/
 				}
 			}
 		}
