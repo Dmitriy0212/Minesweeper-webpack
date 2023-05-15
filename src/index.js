@@ -1,7 +1,7 @@
-
+import toDoList2 from "./select-save-from";
 import clickButton from "./click-button";
 import start from "./start-game";
-
+import localStorageSave from "./local-storage-save";
 export let numberOfRows = 8;
 export let numberOfBomb = 10;
 
@@ -52,10 +52,57 @@ boxForTimer.appendChild(timer)
 let buttonRest = document.createElement('button')
 buttonRest.textContent = String('RESTART')
 buttonRest.className = 'box';
-buttonRest.addEventListener("click", () => {clearInterval(timerId);return mas = start(fild, clickButton,numberOfRows,numberOfBomb) })
+buttonRest.addEventListener("click", () => { clearInterval(timerId); return mas = start(fild, clickButton, numberOfRows, numberOfBomb) })
 menu.appendChild(buttonRest)
 
-let fild = document.createElement('div');
+let buttonSave = document.createElement('button')
+buttonSave.textContent = String('SAVE')
+buttonSave.className = 'box';
+buttonSave.addEventListener("click", localStorageSave)
+menu.appendChild(buttonSave)
+
+export let selectSave = document.createElement('select');
+selectSave.className = 'box';
+menu.appendChild(selectSave);
+selectSave.id = 'selectsave'
+export let selecttSaveSelector = document.querySelector('#selectsave');
+
+export let arr2 = []
+let objJson2 = JSON.stringify(localStorage);
+let objJson3 = JSON.parse(objJson2);
+for (let key in objJson3) {
+    if (JSON.parse(objJson3[key]).save) {
+        arr2.push(JSON.parse(objJson3[key]))
+    }
+}
+
+for (let h = 0; h < selecttSaveSelector.children.length;) {
+    selecttSaveSelector.removeChild(selecttSaveSelector.children[h]);
+}
+debugger
+arr2.sort(function (a, b) {
+    if (a.save.split(' ')[1] > b.save.split(' ')[1]) {
+        return 1;
+    }
+    if (a.save.split(' ')[1] < b.save.split(' ')[1]) {
+        return -1;
+    }
+    // a должно быть равным b
+    return 0;
+});
+debugger
+
+for (let value1 in arr2) {
+    let option = document.createElement('option');
+    option.text = arr2[value1].save
+    option.value = arr2[value1].save;
+    option.selected = false
+    selecttSaveSelector.appendChild(option);
+}
+selectSave.value = ''
+selectSave.addEventListener('change', toDoList2);
+
+export let fild = document.createElement('div');
 fild.className = 'fild'
 conteiner.appendChild(fild)
 
@@ -67,15 +114,13 @@ select.addEventListener('change', function () {
     }
     this.selected = true
     numberOfRows = arr[this.value]
-   mas = start(fild, clickButton,numberOfRows,numberOfBomb)
+    mas = start(fild, clickButton, numberOfRows, numberOfBomb)
 });
-export let mas =start(fild, clickButton,numberOfRows,numberOfBomb)
-
+export let mas = start(fild, clickButton, numberOfRows, numberOfBomb)
 export let timerId;
-
 export function timerGame() {
-	timer.textContent = Number(timer.textContent) + Number(1);
-	timerId =setTimeout(() => {
-		return timerGame()
-	}, 1000)
+    timer.textContent = Number(timer.textContent) + Number(1);
+    timerId = setTimeout(() => {
+        return timerGame()
+    }, 1000)
 }

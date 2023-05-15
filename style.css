@@ -24,10 +24,10 @@
 }
 
 .box {
-    width: 24%;
+    width: 19%;
     color: red;
     background: black;
-    font-size: 15px;
+    font-size: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,6 +75,9 @@
     height: 40px;
     font-weight: 900;
 }
+/*.not-button-bomb:disabled {
+    background: rgb(255, 255, 255);
+    }*/
 
 .restart {
     position: absolute;
