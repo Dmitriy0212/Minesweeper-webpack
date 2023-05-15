@@ -52,7 +52,7 @@ boxForTimer.appendChild(timer)
 let buttonRest = document.createElement('button')
 buttonRest.textContent = String('RESTART')
 buttonRest.className = 'box';
-buttonRest.addEventListener("click", () => {return mas = start(fild, clickButton,numberOfRows,numberOfBomb) })
+buttonRest.addEventListener("click", () => {clearInterval(timerId);return mas = start(fild, clickButton,numberOfRows,numberOfBomb) })
 menu.appendChild(buttonRest)
 
 let fild = document.createElement('div');
