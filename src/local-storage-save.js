@@ -4,7 +4,6 @@ import { numberClicks } from "./index";
 import { selecttSaveSelector } from "./index";
 import { selectSave } from "./index";
 import toDoList from "./select-save";
-export let masTo = [];
 export default function localStorageSave() {
     let arr = { save: '', masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '' };
     let arr1 = [];
@@ -72,6 +71,7 @@ export default function localStorageSave() {
         selecttSaveSelector.appendChild(option);
     }
     masTo = arr2
-    selectSave.addEventListener('change', toDoList);
-
+    debugger;
+    selectSave.addEventListener('change', toDoList, selecttSaveSelector.value = '');
 }
+export let masTo = [];
