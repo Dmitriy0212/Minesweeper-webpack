@@ -126,3 +126,30 @@
     margin: 1px;
     background: rgb(103 247 255);
 }
+
+@media (max-width:500px) {
+    .button {
+        width: 30px;
+        height: 30px;
+    }
+
+    .button-bomb {
+        width: 30px;
+        height: 30px;
+    }
+
+    .button-bomb-heppi {
+        width: 30px;
+        height: 30px;
+    }
+
+    .not-button-bomb {
+        width: 30px;
+        height: 30px;
+    }
+
+    .box {
+        width: 50px;
+        font-size: 60%;
+    }
+}
