@@ -2,9 +2,12 @@
 
 
 .fild {
-    background: aqua;
-    width: fit-content;
-    height: fit-content;
+    display: flex;
+    padding: 1%;
+    margin: 1%;
+    background: #696969;
+    flex-direction: column;
+    border-radius: 3px;
 }
 
 .conteiner {
@@ -12,37 +15,56 @@
     margin: 0 auto;
     display: flex;
     position: relative;
-    width: fit-content;
+    max-width: 1280px;
     height: fit-content;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
 }
+
+.conteiner__game {
+    padding: 1%;
+    background: silver;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
 .menu {
+    margin: 1%;
+    padding: 1%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-content: space-around;
 }
 
 .box {
+    padding: 0.5%;
+    margin: 0.5%;
     text-align: center;
-    width: 19%;
-    color: red;
-    background: black;
+    width: 60px;
+    color: black;
+    background: #696969;
     font-size: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 2px solid red;
-    border-radius: 4px;
-    align-items: center;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.box:hover {
+    background: #1d1d1d;
 }
 
 .select {
+    margin: 5%;
     text-align: center;
     width: 95%;
     height: 15%;
-    color: red;
-    background: black;
+    color: black;
+    background: #696969;
     font-size: 100%;
     display: flex;
     flex-direction: column;
@@ -52,45 +74,45 @@
     align-items: center;
 }
 
+.select:hover {
+    background: #1d1d1d;
+}
+
 .rou {
+    margin: 0.5%;
     display: flex;
-    width: fit-content;
-    height: fit-content;
+    justify-content: space-around;
 }
 
 .button {
-    margin: 1px;
-    background: rgba(72, 72, 72, 0.59);
+    background: rgb(0 0 0 / 60%);
     width: 40px;
     height: 40px;
 }
 
 .button:hover {
-    background: rgb(5, 69, 23);
+    background: rgb(5 69 23/ 60%);
     border-radius: 3px;
 }
 
 .button-bomb {
-    margin: 1px;
-    background: rgb(255, 0, 0);
+    background: rgb(255 0 0/ 60%);
     width: 40px;
     height: 40px;
 }
 
 .button-bomb-heppi {
-    margin: 1px;
-    background: rgb(0, 255, 64);
+    background: rgb(0 255 64/ 60%);
     width: 40px;
     height: 40px;
 }
 
 .not-button-bomb {
-    margin: 1px;
-    background: rgb(255, 255, 255);
+    background: rgb(255 255 255/ 60%);
     width: 40px;
     height: 40px;
-    font-weight: 900;
 }
+
 /*.not-button-bomb:disabled {
     background: rgb(255, 255, 255);
     }*/

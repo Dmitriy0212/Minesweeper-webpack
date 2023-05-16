@@ -4,7 +4,6 @@ import { mas } from "./index";
 import { timerId } from "./index";
 import startFromSave from "./start-game-from-save";
 import { selectSave } from "./index";
-import { timerGame } from "./index";
 import { masTo } from "./local-storage-save";
 export default function toDoList2() {
     debugger
@@ -20,5 +19,4 @@ export default function toDoList2() {
         }
     }
     selectSave.value = ''
-    timerGame()
 }

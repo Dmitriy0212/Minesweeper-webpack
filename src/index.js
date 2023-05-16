@@ -1,7 +1,8 @@
-import toDoList2 from "./select-save-from";
+import toDoList from "./select-save";
 import clickButton from "./click-button";
 import start from "./start-game";
 import localStorageSave from "./local-storage-save";
+import { masTo } from "./local-storage-save";
 export let numberOfRows = 8;
 export let numberOfBomb = 10;
 
@@ -16,20 +17,24 @@ let conteiner = document.createElement('div');
 conteiner.className = 'conteiner';
 body.appendChild(conteiner);
 
+let conteinerGame = document.createElement('div');
+conteinerGame.className = 'conteiner__game';
+conteiner.appendChild(conteinerGame);
+
 let menu = document.createElement('div')
 menu.className = 'menu';
-conteiner.appendChild(menu)
+conteinerGame.appendChild(menu)
 
 let spunLevel = document.createElement('spun');
-spunLevel.textContent='Level'
+spunLevel.textContent = 'Level'
 spunLevel.className = 'box';
 menu.appendChild(spunLevel)
 
-let select = document.createElement('select');
+export let select = document.createElement('select');
 select.className = 'select';
 spunLevel.appendChild(select);
 select.id = 'select'
-let selectSelector = document.querySelector('#select');
+export let selectSelector = document.querySelector('#select');
 for (let value1 in arr) {
     let option = document.createElement('option');
     option.text = value1;
@@ -67,7 +72,7 @@ buttonSave.addEventListener("click", localStorageSave)
 menu.appendChild(buttonSave)
 
 let spunSave = document.createElement('spun');
-spunSave.textContent='Save'
+spunSave.textContent = 'Save'
 spunSave.className = 'box';
 menu.appendChild(spunSave)
 
@@ -112,11 +117,11 @@ for (let value1 in arr2) {
     option.selected = false
     selecttSaveSelector.appendChild(option);
 }
-selectSave.addEventListener('change', toDoList2);
+selectSave.addEventListener('change', toDoList);
 selectSave.value = ''
 export let fild = document.createElement('div');
 fild.className = 'fild'
-conteiner.appendChild(fild)
+conteinerGame.appendChild(fild)
 
 select.addEventListener('change', function () {
     clearInterval(timerId);
@@ -131,6 +136,33 @@ select.addEventListener('change', function () {
     select.value = ''
 });
 select.value = ''
+
+let buttonDeleteSave = document.createElement('button')
+buttonDeleteSave.textContent = String('Delete save')
+buttonDeleteSave.className = 'box';
+buttonDeleteSave.addEventListener("click", () => {
+    debugger;
+    localStorage.clear();
+    for (let i = 0; i < arr2.length;) {
+        arr2.splice(i, 1)
+    }
+    for (let j = 0; j < masTo.length;) {
+        masTo.splice(j, 1)
+    }
+    for (let h = 0; h < selecttSaveSelector.children.length;) {
+        selecttSaveSelector.removeChild(selecttSaveSelector.children[h]);
+    }
+
+    for (let value1 in arr2) {
+        let option = document.createElement('option');
+        option.text = arr2[value1].save
+        option.value = arr2[value1].save;
+        option.selected = false
+        selecttSaveSelector.appendChild(option);
+    }
+})
+menu.appendChild(buttonDeleteSave)
+
 export let mas = start(fild, clickButton, numberOfRows, numberOfBomb)
 export let timerId;
 export function timerGame() {

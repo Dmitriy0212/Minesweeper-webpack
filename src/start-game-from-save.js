@@ -3,6 +3,7 @@ import { numberOfRows } from "./index"
 import clickButton from "./click-button"
 import { fild } from "./index"
 export default function startFromSave(arr1, arr2, arr3) {
+  debugger
   let c = 0
   for (let h = 0; h < fild.children.length;) {
     fild.removeChild(fild.children[h]);

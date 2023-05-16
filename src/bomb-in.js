@@ -1,6 +1,9 @@
 import { mas } from "./index"
+import { timerId } from "./index";
 import { numberOfRows } from "./index"
 export default function bombIn() {
+	debugger
+	clearInterval(timerId);
 	let c = 0
 	let fild1 = document.querySelector('.fild')
 	for (let i = 0; i < fild1.children.length; i++) {

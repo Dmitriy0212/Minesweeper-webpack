@@ -3,9 +3,10 @@ import { timer } from "./index";
 import { numberClicks } from "./index";
 import { mas } from "./index";
 import { masTo } from "./local-storage-save";
-import { timerGame } from "./index";
+import { selectSave } from "./index";
 import startFromSave from "./start-game-from-save";
 export default function toDoList() {
+    debugger
     clearInterval(timerId);
     for (let value1 in masTo) {
         if (this.value == masTo[value1].save) {
@@ -17,5 +18,5 @@ export default function toDoList() {
             startFromSave(masTo[value1].masValue, masTo[value1].masStyle, masTo[value1].colorValue)
         }
     }
-    timerGame()
+    selectSave.value = ''
 }
