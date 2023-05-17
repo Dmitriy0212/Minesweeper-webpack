@@ -6,7 +6,6 @@ import { masTo } from "./local-storage-save";
 import startFromSave from "./start-game-from-save";
 export let numberOfRows = 8;
 export let numberOfBomb = 10;
-localStorage.clear()
 
 
 let arr = {
