@@ -1,7 +1,9 @@
 import { mas } from "./index"
 import { timerId } from "./index";
 import { numberOfRows } from "./index"
+import clearSaveRest from "./clear-the-history"
 export default function bombIn() {
+	clearSaveRest()
 	debugger
 	clearInterval(timerId);
 	let c = 0

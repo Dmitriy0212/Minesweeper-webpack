@@ -2,16 +2,16 @@ import { numberClicks } from "./index"
 import { timer } from "./index"
 import { timerGame } from "./index"
 import { fild } from "./index"
+import { numberOfRows } from "./index"
+import { mas } from "./index";
 import clickButton from "./click-button"
-export default function start(numberOfRows, numberOfBomb) {
-  const mas = [...Array(numberOfRows * numberOfRows).keys()]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, Number(numberOfBomb))
+export default function restart() {
   if (fild.children.length > 0) {
     for (let i = 0; i < fild.children.length;) {
       fild.removeChild(fild.children[i]);
     }
   }
+  console.log(mas)
   numberClicks.textContent = 0
   timer.textContent = 0;
   debugger
@@ -29,5 +29,4 @@ export default function start(numberOfRows, numberOfBomb) {
       rou.appendChild(button)
     }
   }
-  return mas
 }

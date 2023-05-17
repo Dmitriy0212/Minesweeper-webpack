@@ -1,18 +1,16 @@
 import { timerGame } from "./index"
-import { numberOfRows } from "./index"
 import clickButton from "./click-button"
 import { fild } from "./index"
-export default function startFromSave(arr1, arr2, arr3) {
-  debugger
+export default function startFromSave(arr1, arr2, arr3,rows) {
   let c = 0
   for (let h = 0; h < fild.children.length;) {
     fild.removeChild(fild.children[h]);
   }
-  for (let i = 0; i < Number(numberOfRows); i++) {
+  for (let i = 0; i < Number(rows); i++) {
     let rou = document.createElement('div')
     rou.className = 'rou'
     fild.appendChild(rou)
-    for (let j = 0; j < Number(numberOfRows); j++) {
+    for (let j = 0; j < Number(rows); j++) {
       let a = c + j
       for (let count in arr2) {
         if ([count] == a) {
@@ -28,7 +26,7 @@ export default function startFromSave(arr1, arr2, arr3) {
         }
       }
     }
-    c += Number(numberOfRows)
+    c += Number(rows)
   }
   timerGame()
 }

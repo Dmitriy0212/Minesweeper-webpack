@@ -1,6 +1,5 @@
 import { numberClicks } from "./index"
 import { numberOfRows } from "./index"
-import { numberOfBomb } from "./index"
 import fildClick from "./fild-click"
 import { mas } from "./index"
 import ifTheButtonIsFinal from "./if-the-button-is-final"
@@ -10,6 +9,7 @@ import openUpToNumber from "./open-up-to-number"
 import openDounToNumber from "./open-doun-to-number"
 import { timerGame } from "./index"
 export default function clickButton() {
+	debugger
 	let but = this
 	let c = 0;
 	let fild1 = document.querySelector('.fild')

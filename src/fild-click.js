@@ -2,6 +2,7 @@ import colorNumer from "./switch-case"
 import { numberOfRows } from "./index"
 import { mas } from "./index"
 import bombIn from "./bomb-in"
+import localStorageGetSave from "./local-storage-get-save"
 export default function fildClick(event) {
 	let c = 0
 	let d = 0
@@ -72,5 +73,6 @@ export default function fildClick(event) {
 	}
 	event.className = 'not-button-bomb'
 	event.disabled = true
+	localStorageGetSave()
 	return
 }

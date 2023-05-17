@@ -1,11 +1,27 @@
 import { mas } from "./index";
 import { timer } from "./index";
 import { numberClicks } from "./index";
-import { selecttSaveSelector } from "./index";
-import { selectSave } from "./index";
-import toDoList from "./select-save";
+import { numberOfRows } from "./index";
 export default function localStorageSave() {
-    let arr = { save: '', masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '' };
+    let today = new Date();
+    let now = today.toLocaleString();
+    let obgSaveForSave = {
+        save: '', masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: ''
+    }
+    let obgSaveForRes = {
+        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: ''
+    }
+    let arr = {
+        obgAll: {
+            obgSave: [
+                { save: '', masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '' }
+            ],
+            obgSaveRest: [
+                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '' }
+            ],
+            masStatist: []
+        }
+    };
     let arr1 = [];
     let arr3 = [];
     let arr4 = [];
@@ -17,61 +33,83 @@ export default function localStorageSave() {
             arr4.push(fild1.children[i].children[j].style.color)
         }
     }
-    arr.masBomb = mas;
-    arr.masStyle = arr1
-    arr.masValue = arr3
-    arr.colorValue = arr4
-    arr.time = timer.textContent
-    if (localStorage.length == 0) {
-        arr.save = 'Save 1'
-    }
-    else if (localStorage.length > 0) {
-        arr.save = 'Save ' + (Number(localStorage.length) + Number(1))
-    }
-    arr.clicks = numberClicks.textContent
-    let objJson1 = JSON.stringify(arr);
-    if (localStorage.length == 0) {
-        localStorage.setItem('Save 1', objJson1);
-    }
-    else if (localStorage.length > 0) {
-        localStorage.setItem('Save ' + (Number(localStorage.length) + Number(1)), objJson1);
-    }
+
+    arr.obgAll.obgSave[0].save = now;
+    arr.obgAll.obgSave[0].masBomb = mas;
+    arr.obgAll.obgSave[0].masStyle = arr1
+    arr.obgAll.obgSave[0].masValue = arr3
+    arr.obgAll.obgSave[0].colorValue = arr4
+    arr.obgAll.obgSave[0].time = timer.textContent
+    arr.obgAll.obgSave[0].clicks = numberClicks.textContent
+    arr.obgAll.obgSave[0].numberRous = numberOfRows;
+
+    obgSaveForSave.save = now;
+    obgSaveForSave.masBomb = mas;
+    obgSaveForSave.masStyle = arr1
+    obgSaveForSave.masValue = arr3
+    obgSaveForSave.colorValue = arr4
+    obgSaveForSave.time = timer.textContent
+    obgSaveForSave.clicks = numberClicks.textContent
+    obgSaveForSave.numberRous = numberOfRows;
+
+    obgSaveForRes.masBomb = mas;
+    obgSaveForRes.masStyle = arr1
+    obgSaveForRes.masValue = arr3
+    obgSaveForRes.colorValue = arr4
+    obgSaveForRes.time = timer.textContent
+    obgSaveForRes.clicks = numberClicks.textContent
+    obgSaveForRes.numberRous = numberOfRows;
+
+    arr.obgAll.obgSaveRest[0].masBomb = mas;
+    arr.obgAll.obgSaveRest[0].masStyle = arr1
+    arr.obgAll.obgSaveRest[0].masValue = arr3
+    arr.obgAll.obgSaveRest[0].colorValue = arr4
+    arr.obgAll.obgSaveRest[0].time = timer.textContent
+    arr.obgAll.obgSaveRest[0].clicks = numberClicks.textContent
+    arr.obgAll.obgSaveRest[0].numberRous = numberOfRows;
+
     let arr2 = [];
     /*localStorage.clear();*/
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
+
+    localStorage.clear()
     for (let key in objJson3) {
-        if (String(key).includes('Save ')!==true) {
-            continue
-        }
-        else if (String(key).includes('Save ')==true) {
-            arr2.push(JSON.parse(objJson3[key]))
+        if (String(key).includes('Save') !== true) {
+            localStorage.setItem(key, objJson3[key]);
         }
     }
+    let objJson1;
+    for (let key in objJson3) {
+        if (String(key).includes('Save') == true) {
+            let object2 = JSON.parse(objJson3[key]);
+            if (object2.obgAll.obgSave.length == 10) {
+                object2.obgAll.obgSave.sort(function (a, b) {
+                    if (a.save > b.save) {
+                        return 1;
+                    }
+                    if (a.save < b.save) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                object2.obgAll.obgSave.splice(0, 1, obgSaveForSave)
+                object2.obgAll.obgSaveRest.splice(0, 1, obgSaveForRes)
+                objJson1 = JSON.stringify(object2);
+                masTo = object2.obgAll.obgSave
+                localStorage.setItem('Save', objJson1);
+                return
+            }
 
-    for (let h = 0; h < selecttSaveSelector.children.length;) {
-        selecttSaveSelector.removeChild(selecttSaveSelector.children[h]);
-    }
-    
-    arr2.sort(function (a, b) {
-        if (a.save.split(' ')[1] > b.save.split(' ')[1]) {
-            return 1;
+            object2.obgAll.obgSave.splice(0, 0, obgSaveForSave)
+            object2.obgAll.obgSaveRest.splice(0, 1, obgSaveForRes)
+            objJson1 = JSON.stringify(object2);
+            masTo = object2.obgAll.obgSave
+            localStorage.setItem('Save', objJson1);
+            return
         }
-        if (a.save.split(' ')[1] < b.save.split(' ')[1]) {
-            return -1;
-        }
-        return 0;
-    });
-
-    for (let value1 in arr2) {
-        let option = document.createElement('option');
-        option.text = arr2[value1].save
-        option.value = arr2[value1].save;
-        option.selected = false
-        selecttSaveSelector.appendChild(option);
     }
+    localStorage.setItem('Save', JSON.stringify(arr));
     masTo = arr2
-    debugger;
-    selectSave.addEventListener('change', toDoList, selecttSaveSelector.value = '');
 }
 export let masTo = [];
