@@ -1,6 +1,6 @@
 import colorNumer from "./switch-case"
 import { mas } from "./index"
-import { numberOfRows } from "./index"
+import { spunLevelThis } from "./index"
 export default function openUpFild(event) {
 	let c = 0
 	let d = 0
@@ -11,11 +11,11 @@ export default function openUpFild(event) {
 				if (event == fild1.children[i].children[fild1.children[i].children.length - 1]) {
 					let a = c + j
 					for (let count in mas) {
-						if (mas[count] == a - 1 || mas[count] == a + numberOfRows || mas[count] == a + (numberOfRows - 1) || mas[count] == a - (numberOfRows + 1) || mas[count] == a - numberOfRows) {
+						if (mas[count] == a - 1 || mas[count] == a + fild1.children.length || mas[count] == a + (fild1.children.length - 1) || mas[count] == a - (fild1.children.length + 1) || mas[count] == a - fild1.children.length) {
 							d += 1
 							colorNumer(d,event)
 							event.textContent = d
-							event.className = 'not-button-bomb'
+							event.className = 'not-button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 						}
 					}
@@ -23,11 +23,11 @@ export default function openUpFild(event) {
 				else if (event == fild1.children[i].children[0]) {
 					let a = c + j
 					for (let count in mas) {
-						if (mas[count] == a + 1 || mas[count] == a + (numberOfRows + 1) || mas[count] == a + numberOfRows || mas[count] == a - numberOfRows || mas[count] == a - (numberOfRows - 1)) {
+						if (mas[count] == a + 1 || mas[count] == a + (fild1.children.length + 1) || mas[count] == a + fild1.children.length || mas[count] == a - fild1.children.length || mas[count] == a - (fild1.children.length - 1)) {
 							d += 1
 							colorNumer(d,event)
 							event.textContent = d
-							event.className = 'not-button-bomb'
+							event.className = 'not-button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 						}
 					}
@@ -35,18 +35,18 @@ export default function openUpFild(event) {
 				else if (event !== fild1.children[i].children[0] || event == fild1.children[i].children[fild1.children[i].children.length - 1]) {
 					let a = c + j;
 					for (let count in mas) {
-						if (mas[count] == a + 1 || mas[count] == a - 1 || mas[count] == a + (numberOfRows + 1) || mas[count] == a + numberOfRows || mas[count] == a + (numberOfRows - 1) || mas[count] == a - (numberOfRows + 1) || mas[count] == a - numberOfRows || mas[count] == a - (numberOfRows - 1)) {
+						if (mas[count] == a + 1 || mas[count] == a - 1 || mas[count] == a + (fild1.children.length + 1) || mas[count] == a + fild1.children.length || mas[count] == a + (fild1.children.length - 1) || mas[count] == a - (fild1.children.length + 1) || mas[count] == a - fild1.children.length || mas[count] == a - (fild1.children.length - 1)) {
 							d += 1
 							colorNumer(d,event)
 							event.textContent = d
-							event.className = 'not-button-bomb'
+							event.className = 'not-button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 						}
 					}
 				}
 			}
 		}
-		c += Number(numberOfRows)
+		c += Number(fild1.children.length)
 	}
 	return d
 }

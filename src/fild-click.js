@@ -1,9 +1,8 @@
 import colorNumer from "./switch-case"
 import { numberOfRows } from "./index"
-import { mas } from "./index"
 import bombIn from "./bomb-in"
-import localStorageGetSave from "./local-storage-get-save"
-export default function fildClick(event) {
+import { spunLevelThis } from "./index"
+export default function fildClick(event,mas) {
 	let c = 0
 	let d = 0
 	let fild1 = document.querySelector('.fild')
@@ -15,7 +14,7 @@ export default function fildClick(event) {
 					for (let count in mas) {
 						if (mas[count] == a) {
 							event.textContent = 'x'
-							event.className = 'button-bomb'
+							event.className = 'button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 							bombIn()
 							return
@@ -24,7 +23,7 @@ export default function fildClick(event) {
 							d += 1
                             colorNumer(d,event)
 							event.textContent = d
-							event.className = 'not-button-bomb'
+							event.className = 'not-button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 						}
 					}
@@ -34,7 +33,7 @@ export default function fildClick(event) {
 					for (let count in mas) {
 						if (mas[count] == a) {
 							event.textContent = 'x'
-							event.className = 'button-bomb'
+							event.className = 'button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 							bombIn()
 							return
@@ -43,7 +42,7 @@ export default function fildClick(event) {
                             d += 1
                             colorNumer(d,event)
 							event.textContent = d
-							event.className = 'not-button-bomb'
+							event.className = 'not-button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 						}
 					}
@@ -53,7 +52,7 @@ export default function fildClick(event) {
 					for (let count in mas) {
 						if (mas[count] == a) {
 							event.textContent = 'x'
-							event.className = 'button-bomb'
+							event.className = 'button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 							bombIn()
 							return
@@ -62,7 +61,7 @@ export default function fildClick(event) {
 							d += 1
                             colorNumer(d,event)
 							event.textContent = d
-							event.className = 'not-button-bomb'
+							event.className = 'not-button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 							event.disabled = true
 						}
 					}
@@ -71,8 +70,7 @@ export default function fildClick(event) {
 		}
 		c += Number(numberOfRows)
 	}
-	event.className = 'not-button-bomb'
+	event.className = 'not-button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 	event.disabled = true
-	localStorageGetSave()
 	return
 }

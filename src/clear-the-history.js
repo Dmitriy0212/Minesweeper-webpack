@@ -1,13 +1,13 @@
 export default function clearSaveRest() {
+	
     let obgSaveForRes = {
-        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: ''
+        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: ''
     }
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
 
     localStorage.clear()
-    debugger
     for (let key in objJson3) {
         if (String(key).includes('Save') !== true) {
             localStorage.setItem(key, objJson3[key]);

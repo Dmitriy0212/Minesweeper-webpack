@@ -1,5 +1,4 @@
 import { numberClicks } from "./index"
-import { numberOfRows } from "./index"
 import fildClick from "./fild-click"
 import { mas } from "./index"
 import ifTheButtonIsFinal from "./if-the-button-is-final"
@@ -8,8 +7,8 @@ import openRiteToNumber from "./open-rite-to-number"
 import openUpToNumber from "./open-up-to-number"
 import openDounToNumber from "./open-doun-to-number"
 import { timerGame } from "./index"
+import localStorageGetSave from "./local-storage-get-save"
 export default function clickButton() {
-	debugger
 	let but = this
 	let c = 0;
 	let fild1 = document.querySelector('.fild')
@@ -42,19 +41,20 @@ export default function clickButton() {
 							func();
 						}
 					}
-					/*fild1.children[i].children[j].textContent = 'x'*/
+					fild1.children[i].children[j].textContent = 'x'
 				}
 			}
 		}
-		c += Number(numberOfRows)
+		c += Number(fild1.children.length)
 	}
 	setTimeout(() => {
 		numberClicks.textContent = Number(numberClicks.innerHTML) + 1;
-		fildClick(but);
+		fildClick(but,mas);
 		openRiteToNumber(but)
 		openLeftToNumber(but)
 		openUpToNumber(but)
 		openDounToNumber(but)
-		ifTheButtonIsFinal();
+		localStorageGetSave()
+		ifTheButtonIsFinal(mas);
 	});
 }

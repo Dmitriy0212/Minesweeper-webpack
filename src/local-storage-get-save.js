@@ -5,11 +5,12 @@ import { numberOfRows } from "./index";
 import ifLocalStorageLength from "./if-local-storage-length-0";
 export default function localStorageGetSave() {
     let obgSaveForRes = {
-        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: ''
+        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: ''
     }
     let arr1 = [];
     let arr3 = [];
     let arr4 = [];
+    let level = document.querySelector('#level')
     let fild1 = document.querySelector('.fild')
     for (let i = 0; i < fild1.children.length; i++) {
         for (let j = 0; j < fild1.children[i].children.length; j++) {
@@ -25,13 +26,13 @@ export default function localStorageGetSave() {
     obgSaveForRes.colorValue = arr4
     obgSaveForRes.time = timer.textContent
     obgSaveForRes.clicks = numberClicks.textContent
-    obgSaveForRes.numberRous = numberOfRows;
+    obgSaveForRes.numberRous = fild1.children.length;
+    obgSaveForRes.levelThis = level.textContent;
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
 
     localStorage.clear()
-    debugger
     for (let key in objJson3) {
         if (String(key).includes('Save') !== true) {
             localStorage.setItem(key, objJson3[key]);

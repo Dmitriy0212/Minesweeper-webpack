@@ -4,14 +4,16 @@ import start from "./start-game";
 import localStorageSave from "./local-storage-save";
 import { masTo } from "./local-storage-save";
 import startFromSave from "./start-game-from-save";
-export let numberOfRows = 8;
-export let numberOfBomb = 10;
+import clearSaveRest from "./clear-the-history";
+export let numberOfRows = 10;
+export let numberOfBomb = 4;
 
 
 let arr = {
-    'easy': 8,
-    'difficult': 10,
-    'advanced': 12
+    'lou': 4,
+    'Easy': 10,
+    'Difficult': 15,
+    'Advanced': 25
 };
 
 export let arr2 = []
@@ -60,6 +62,11 @@ spunLevel.textContent = 'Level'
 spunLevel.className = 'box';
 menu.appendChild(spunLevel)
 
+export let spunLevelThis = document.createElement('spun');
+spunLevelThis.textContent = 'Easy'
+spunLevelThis.id = 'level';
+spunLevel.appendChild(spunLevelThis)
+
 let spunLevelList = document.createElement('ul');
 spunLevelList.className = 'menu__list';
 spunLevel.appendChild(spunLevelList)
@@ -72,16 +79,16 @@ spunLevel.addEventListener('click', function () {
             spunLeveItem.textContent = index;
             spunLeveItem.className = 'menu__item';
             spunLeveItem.addEventListener('click', function () {
+                clearSaveRest()
                 clearInterval(timerId);
                 numberClicks.textContent = 0;
                 timer.textContent = 0;
-
+                spunLevelThis.textContent = this.textContent
                 for (let i = 0; i < fild.children.length;) {
                     fild.removeChild(fild.children[i]);
                 }
-                debugger
                 numberOfRows = arr[this.textContent]
-                mas = start(numberOfRows, numberOfBomb)
+                mas = start(arr[this.textContent], numberOfBomb)
             });
             spunLevelList.appendChild(spunLeveItem);
         }
@@ -191,22 +198,25 @@ export function timerGame() {
 
 export let mas = [];
 
-for (let key in objJson3) {
-    debugger
+
+let obj1 = JSON.stringify(localStorage);
+let obj2 = JSON.parse(obj1);
+for (let key in obj2) {
     if (String(key).includes('Save') !== true) {
         continue
     }
     else if (String(key).includes('Save') == true) {
-        let object1 = JSON.parse(objJson3[key]);
-        if (object1.obgAll.obgSaveRest[0].masBomb.length == 0) {
+        let obj = JSON.parse(objJson3[key]);
+        if (obj.obgAll.obgSaveRest[0].masBomb.length == 0) {
             mas = start(numberOfRows, numberOfBomb)
             break;
         }
-        timer.textContent = object1.obgAll.obgSaveRest[0].time
-        numberClicks.textContent = object1.obgAll.obgSaveRest[0].clicks
-        mas = object1.obgAll.obgSaveRest[0].masBomb
-        console.log(mas)
-        startFromSave(object1.obgAll.obgSaveRest[0].masValue, object1.obgAll.obgSaveRest[0].masStyle, object1.obgAll.obgSaveRest[0].colorValue, object1.obgAll.obgSaveRest[0].numberRous)
+        console.log(obj.obgAll.obgSaveRest[0].numberRous)
+        spunLevelThis.textContent=obj.obgAll.obgSaveRest[0].levelThis
+        timer.textContent = obj.obgAll.obgSaveRest[0].time
+        numberClicks.textContent = obj.obgAll.obgSaveRest[0].clicks
+        mas = obj.obgAll.obgSaveRest[0].masBomb
+        startFromSave(obj.obgAll.obgSaveRest[0].masValue, obj.obgAll.obgSaveRest[0].masStyle, obj.obgAll.obgSaveRest[0].colorValue, obj.obgAll.obgSaveRest[0].numberRous)
     }
 }
 if (objJson3.Save == undefined) {

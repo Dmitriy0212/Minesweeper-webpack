@@ -3,6 +3,7 @@ import { timer } from "./index"
 import { timerGame } from "./index"
 import { fild } from "./index"
 import clickButton from "./click-button"
+import { spunLevelThis } from "./index"
 export default function start(numberOfRows, numberOfBomb) {
   const mas = [...Array(numberOfRows * numberOfRows).keys()]
     .sort(() => Math.random() - 0.5)
@@ -14,7 +15,6 @@ export default function start(numberOfRows, numberOfBomb) {
   }
   numberClicks.textContent = 0
   timer.textContent = 0;
-  debugger
   for (let i = 0; i < Number(numberOfRows); i++) {
     let rou = document.createElement('div')
     rou.className = 'rou'
@@ -22,7 +22,7 @@ export default function start(numberOfRows, numberOfBomb) {
     for (let j = 0; j < Number(numberOfRows); j++) {
       let b = ' ';
       let button = document.createElement('button')
-      button.className = 'button'
+      button.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
       button.addEventListener("click", timerGame)
       button.textContent = String(b)
       button.addEventListener("click", clickButton)

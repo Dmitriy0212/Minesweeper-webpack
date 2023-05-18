@@ -6,10 +6,10 @@ export default function ifLocalStorageLength() {
     let arr = {
         obgAll: {
             obgSave: [
-                { save: '', masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '' }
+                { save: '', masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '' }
             ],
             obgSaveRest: [
-                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '' }
+                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '' }
             ],
             masStatist: []
         }
@@ -17,6 +17,7 @@ export default function ifLocalStorageLength() {
     let arr1 = [];
     let arr3 = [];
     let arr4 = [];
+    let level = document.querySelector('#level')
     let fild1 = document.querySelector('.fild')
     for (let i = 0; i < fild1.children.length; i++) {
         for (let j = 0; j < fild1.children[i].children.length; j++) {
@@ -32,7 +33,8 @@ export default function ifLocalStorageLength() {
     arr.obgAll.obgSaveRest[0].colorValue = arr4
     arr.obgAll.obgSaveRest[0].time = timer.textContent
     arr.obgAll.obgSaveRest[0].clicks = numberClicks.textContent
-    arr.obgAll.obgSaveRest[0].numberRous = numberOfRows;
+    arr.obgAll.obgSaveRest[0].numberRous = fild1.children.length;
+    arr.obgAll.obgSaveRest[0].levelThis = level.textContent;
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
