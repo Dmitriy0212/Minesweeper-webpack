@@ -6,6 +6,7 @@ li {
 
 
 .fild {
+    position: relative;
     display: flex;
     padding: 1%;
     margin: 1%;
@@ -135,14 +136,22 @@ li {
 
 .button-bomb-easy {
     background: rgb(255 0 0/ 60%);
+    display: flex;
     width: 40px;
     height: 40px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .button-bomb-heppi-easy {
     background: rgb(0 255 64/ 60%);
+    display: flex;
     width: 40px;
     height: 40px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .not-button-bomb-easy {
@@ -163,15 +172,23 @@ li {
 }
 
 .button-bomb-difficult {
+    display: flex;
     background: rgb(255 0 0/ 60%);
     width: 40px;
     height: 40px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .button-bomb-heppi-difficult {
     background: rgb(0 255 64/ 60%);
+    display: flex;
     width: 40px;
     height: 40px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .not-button-bomb-difficult {
@@ -192,15 +209,23 @@ li {
 }
 
 .button-bomb-advanced {
+    display: flex;
     background: rgb(255 0 0/ 60%);
     width: 40px;
     height: 40px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .button-bomb-heppi-advanced {
     background: rgb(0 255 64/ 60%);
+    display: flex;
     width: 40px;
     height: 40px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .not-button-bomb-advanced {
@@ -209,9 +234,50 @@ li {
     height: 40px;
 }
 
+.button-rite-easy {
+    display: flex;
+    background: rgb(0 0 0);
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.button-rite-difficult {
+    display: flex;
+    background: rgb(0 0 0);
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.button-rite-advanced {
+    display: flex;
+    background: rgb(0 0 0);
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
 /*.not-button-bomb:disabled {
     background: rgb(255, 255, 255);
     }*/
+
+    .button-rite-lou {
+        display: flex;
+        background: rgb(0 0 0);
+        width: 40px;
+        height: 40px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
 
 .button-lou {
     background: rgb(0 0 0 / 60%);
@@ -243,13 +309,19 @@ li {
 }
 
 .restart {
-    position: absolute;
-    top: 30%;
-    bottom: 30%;
-    left: 10%;
-    right: 10%;
-    margin: 1px;
+    border-radius: 3px;
+    position: initial;
+    text-align: center;
+    margin: 0 auto;
     background: rgb(103 247 255);
+}
+
+.restart-fool {
+    border-radius: 3px;
+    position: initial;
+    text-align: center;
+    margin: 0 auto;
+    background: rgb(255, 0, 0);
 }
 
 .menu__list {
@@ -264,6 +336,7 @@ li {
 }
 
 .menu__list.active {
+    z-index: 1;
     width: fit-content;
     display: flex;
     transition-duration: 1.0s;
@@ -293,6 +366,7 @@ li {
 }
 
 .menu__list__save.active {
+    z-index: 1;
     width: fit-content;
     display: flex;
     transition-duration: 1.0s;
@@ -384,6 +458,11 @@ li {
 
 
 @media (max-width:620px) {
+    
+    .rou {
+        display: flex;
+        justify-content: center;
+    }
 
     .button-advanced {
         width: 20px;
@@ -432,6 +511,26 @@ li {
 }
 
 @media (max-width:500px) {
+
+    .button-advanced {
+        width: 15px;
+        height: 15px;
+    }
+
+    .button-bomb-advanced {
+        width: 15px;
+        height: 15px;
+    }
+
+    .button-bomb-heppi-advanced {
+        width: 15px;
+        height: 15px;
+    }
+
+    .not-button-bomb-advanced {
+        width: 15px;
+        height: 15px;
+    }
 
     .button-difficult {
         width: 25px;
