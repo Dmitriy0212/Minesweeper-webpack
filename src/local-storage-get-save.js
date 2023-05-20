@@ -21,7 +21,12 @@ export default function localStorageGetSave() {
             else if (fild1.children[i].children[j].children[0] == undefined) {
                 arr2.push('')
             }
-            arr3.push(fild1.children[i].children[j].textContent)
+            if (fild1.children[i].children[j].textContent == ' ') {
+                arr3.push('')
+            }
+            else if (fild1.children[i].children[j].textContent !== ' ') {
+                arr3.push(fild1.children[i].children[j].textContent)
+            }
             arr4.push(fild1.children[i].children[j].style.color)
         }
     }
@@ -36,6 +41,8 @@ export default function localStorageGetSave() {
     obgSaveForRes.levelThis = level.textContent;
     obgSaveForRes.masArt = arr2;
 
+
+
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
     localStorage.clear()
@@ -46,6 +53,7 @@ export default function localStorageGetSave() {
     }
     let objJson1;
     for (let key in objJson3) {
+        debugger
         if (String(key).includes('Save') == true) {
             let object2 = JSON.parse(objJson3[key]);
             object2.obgAll.obgSaveRest.splice(0, 1, obgSaveForRes)

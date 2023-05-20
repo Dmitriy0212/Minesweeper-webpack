@@ -1,12 +1,12 @@
 import toDoList from "./select-save";
 import restart from "./restart";
 import start from "./start-game";
-import localStorageSave from "./local-storage-save";
 import localStorageGetSave from "./local-storage-get-save";
 import startFromSave from "./start-game-from-save";
 import clearSaveRest from "./clear-the-history";
 import newGame from "./new-game";
 import closeWimd from "./close-wind";
+import theme from "./theme";
 export let numberOfRows = 10;
 export let numberOfBomb = 10;
 export let mas = [];
@@ -64,6 +64,32 @@ spunLevel.className = 'box';
 spunLevel.textContent = 'Level'
 menu.appendChild(spunLevel)
 
+let numberBombInput = document.createElement('div');
+numberBombInput.className = 'box';
+menu.appendChild(numberBombInput)
+
+let bombInput = document.createElement('input');
+bombInput.value = numberOfBomb
+numberBombInput.appendChild(bombInput)
+let bombButton = document.createElement('button');
+bombButton.textContent = 'click'
+bombButton.addEventListener("click", () => {
+    let arr = []
+    numberOfBomb = bombInput.value
+    arr = start(numberOfRows, numberOfBomb)
+    mas = []
+    for (let key2 in arr) {
+        mas.splice(key2, 1, arr[key2])
+    }
+    if (conteinerGame.children.length > 2) {
+        let nested = document.getElementById("restart");
+        conteinerGame.removeChild(nested);
+    }
+    clearSaveRest()
+    clearInterval(timerId);
+})
+numberBombInput.appendChild(bombButton)
+
 export let spunLevelThis = document.createElement('spun');
 spunLevelThis.textContent = 'Easy'
 spunLevelThis.id = 'level';
@@ -101,20 +127,23 @@ buttonNew.className = 'box';
 buttonNew.addEventListener("click", () => { clearInterval(timerId); return mas = newGame() })
 menu.appendChild(buttonNew)
 
-let buttonSave = document.createElement('button')
-buttonSave.textContent = String('Save')
-buttonSave.className = 'box';
-buttonSave.addEventListener("click", localStorageSave)
-menu.appendChild(buttonSave)
+let spunTheme = document.createElement('spun')
+spunTheme.textContent = String('Theme')
+spunTheme.className = 'box';
+menu.appendChild(spunTheme)
 
-let spunSave = document.createElement('spun');
-spunSave.textContent = 'Win statistics'
-spunSave.className = 'box';
-menu.appendChild(spunSave)
+export let spunThemeThis = document.createElement('spun')
+spunThemeThis.textContent = String('Dark')
+spunTheme.appendChild(spunThemeThis)
+
+let spunStatistics = document.createElement('spun');
+spunStatistics.textContent = 'Win statistics'
+spunStatistics.className = 'box';
+menu.appendChild(spunStatistics)
 
 export let spunSaveList = document.createElement('ul');
 spunSaveList.className = 'menu__list__save';
-spunSave.appendChild(spunSaveList)
+spunStatistics.appendChild(spunSaveList)
 
 spunLevel.addEventListener('click', function () {
     if (spunLevelList.children.length == 0) {
@@ -151,7 +180,7 @@ spunLevel.addEventListener('click', function () {
     spunLevelList.classList.toggle('active');
 })
 
-spunSave.addEventListener('click', function () {
+spunStatistics.addEventListener('click', function () {
     closeWimd(spunLevelList)
     let masItem = []
     let objItem1 = JSON.stringify(localStorage);
@@ -185,7 +214,10 @@ spunSave.addEventListener('click', function () {
     }
     spunSaveList.classList.toggle('active');
 })
-
+numberBombInput.addEventListener("click", () => {
+    closeWimd(spunLevelList)
+    closeWimd(spunSaveList)
+})
 export let fild = document.createElement('div');
 fild.className = 'fild'
 conteinerGame.appendChild(fild)
@@ -198,6 +230,36 @@ buttonDeleteSave.addEventListener("click", () => {
 })
 menu.appendChild(buttonDeleteSave)
 
+spunTheme.addEventListener("click", () => {
+    debugger
+    if (spunLevel.classList.length == 1) {
+        spunThemeThis.textContent = 'Light'
+        theme(spunLevel)
+        theme(boxForNumberClicks)
+        theme(boxForTimer)
+        theme(buttonRest)
+        theme(buttonNew)
+        theme(spunTheme)
+        theme(spunStatistics)
+        theme(buttonDeleteSave)
+        theme(fild)
+        theme(numberBombInput)
+    }
+    else if (spunLevel.classList.length > 1) {
+        spunThemeThis.textContent = 'Dark'
+        theme(spunLevel)
+        theme(boxForNumberClicks)
+        theme(boxForTimer)
+        theme(buttonRest)
+        theme(buttonNew)
+        theme(spunTheme)
+        theme(spunStatistics)
+        theme(buttonDeleteSave)
+        theme(fild)
+        theme(numberBombInput)
+    }
+})
+
 export let timerId;
 export function timerGame() {
     timer.textContent = Number(timer.textContent) + Number(1);
@@ -206,8 +268,6 @@ export function timerGame() {
     }, 1000)
 }
 
-/*body.addEventListener("click",closeWimd(spunSaveList))
-body.addEventListener("click",closeWimd(spunLevelList))*/
 let obj1 = JSON.stringify(localStorage);
 let obj2 = JSON.parse(obj1);
 for (let key in obj2) {
@@ -221,19 +281,17 @@ for (let key in obj2) {
             mas = start(numberOfRows, numberOfBomb)
             break;
         }
-        console.log(obj.obgAll.obgSaveRest[0].masArt)
         spunLevelThis.textContent = obj.obgAll.obgSaveRest[0].levelThis
         timer.textContent = obj.obgAll.obgSaveRest[0].time
         numberClicks.textContent = obj.obgAll.obgSaveRest[0].clicks
+        numberOfBomb=obj.obgAll.obgSaveRest[0].masBomb.length
+        bombInput.value=obj.obgAll.obgSaveRest[0].masBomb.length
         for (let key2 in obj.obgAll.obgSaveRest[0].masBomb) {
             mas.splice(key2, 1, obj.obgAll.obgSaveRest[0].masBomb[key2])
         }
-        /*mas = obj.obgAll.obgSaveRest[0].masBomb*/
         startFromSave(obj.obgAll.obgSaveRest[0].masValue, obj.obgAll.obgSaveRest[0].masStyle, obj.obgAll.obgSaveRest[0].colorValue, obj.obgAll.obgSaveRest[0].numberRous, obj.obgAll.obgSaveRest[0].masArt)
     }
 }
 if (objJson3.Save == undefined) {
-    console.log('1')
-    debugger
     mas = start(numberOfRows, numberOfBomb)
 }

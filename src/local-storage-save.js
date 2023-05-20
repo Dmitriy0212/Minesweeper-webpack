@@ -35,10 +35,16 @@ export default function localStorageSave() {
             else if (fild1.children[i].children[j].children[0] == undefined) {
                 arr2.push('')
             }
-            arr3.push(fild1.children[i].children[j].textContent)
+            if (fild1.children[i].children[j].textContent == ' ') {
+                arr3.push('')
+            }
+            else if (fild1.children[i].children[j].textContent !== ' ') {
+                arr3.push(fild1.children[i].children[j].textContent)
+            }
             arr4.push(fild1.children[i].children[j].style.color)
         }
     }
+
     arr.obgAll.masStatist[0].save = now;
     arr.obgAll.masStatist[0].time = timer.textContent
     arr.obgAll.masStatist[0].clicks = numberClicks.textContent
@@ -95,7 +101,6 @@ export default function localStorageSave() {
                 localStorage.setItem('Save', objJson1);
                 return
             }
-
             object2.obgAll.masStatist.splice(0, 0, masStatistForSave)
             object2.obgAll.obgSaveRest.splice(0, 1, obgSaveForRes)
             objJson1 = JSON.stringify(object2);

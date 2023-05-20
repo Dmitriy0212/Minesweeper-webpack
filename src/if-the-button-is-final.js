@@ -6,13 +6,14 @@ import { numberClicks } from "./index";
 import { conteinerGame } from "./index"
 import clearSaveRest from "./clear-the-history";
 import localStorageSave from "./local-storage-save";
+import soundHolla from "./sound-holla";
 export default function ifTheButtonIsFinal(mas) {
 	let b = 0;
 	let d = 0;
 	let fild1 = document.querySelector('.fild')
 	for (let i = 0; i < fild1.children.length; i++) {
 		for (let j = 0; j < fild1.children[i].children.length; j++) {
-			if (fild1.children[i].children[j].className == ('button-bomb' + '-' + spunLevelThis.textContent.toLowerCase())) {
+			if (fild1.children[i].children[j].className == ('button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()) || fild1.children[i].children[j].className == ('button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()+' active')) {
 				clearInterval(timerId);
 				clearSaveRest()
 				return
@@ -51,6 +52,7 @@ export default function ifTheButtonIsFinal(mas) {
 					conteinerGame.appendChild(restart)
 					clearSaveRest()
 					clearInterval(timerId);
+					soundHolla()
 					return
 				}
 			}

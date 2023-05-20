@@ -10,6 +10,7 @@ import { numberOfBomb } from "./index"
 import { spunSaveList } from "./index"
 import { spunLevelList } from "./index"
 import closeWimd from "./close-wind";
+import { spunThemeThis } from "./index"
 export default function newGame() {
   closeWimd(spunSaveList)
   closeWimd(spunLevelList)

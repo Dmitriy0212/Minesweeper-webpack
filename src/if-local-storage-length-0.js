@@ -25,10 +25,16 @@ export default function ifLocalStorageLength() {
             else if (fild1.children[i].children[j].children[0] == undefined) {
                 arr2.push('')
             }
-            arr3.push(fild1.children[i].children[j].textContent)
+            if (fild1.children[i].children[j].textContent == ' ') {
+                arr3.push('')
+            }
+            else if (fild1.children[i].children[j].textContent !== ' ') {
+                arr3.push(fild1.children[i].children[j].textContent)
+            }
             arr4.push(fild1.children[i].children[j].style.color)
         }
     }
+    
     arr.obgAll.obgSaveRest[0].masBomb = mas;
     arr.obgAll.obgSaveRest[0].masStyle = arr1
     arr.obgAll.obgSaveRest[0].masValue = arr3

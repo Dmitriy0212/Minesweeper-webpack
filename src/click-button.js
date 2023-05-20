@@ -11,9 +11,12 @@ import localStorageGetSave from "./local-storage-get-save"
 import { spunSaveList } from "./index"
 import { spunLevelList } from "./index"
 import closeWimd from "./close-wind";
+import soundClick from "./sound-click";
 export default function clickButton() {
+	debugger
 	closeWimd(spunSaveList)
 	closeWimd(spunLevelList)
+	soundClick()
 
 	let but = this
 	let c = 0;
