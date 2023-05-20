@@ -13,7 +13,6 @@ import { spunLevelList } from "./index"
 import closeWimd from "./close-wind";
 import soundClick from "./sound-click";
 export default function clickButton() {
-	debugger
 	closeWimd(spunSaveList)
 	closeWimd(spunLevelList)
 	soundClick()
@@ -51,7 +50,6 @@ export default function clickButton() {
 							func();
 						}
 					}
-					/*fild1.children[i].children[j].textContent = 'x'*/
 				}
 			}
 		}

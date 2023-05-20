@@ -36,7 +36,7 @@ export default function localStorageSave() {
                 arr2.push('')
             }
             if (fild1.children[i].children[j].textContent == ' ') {
-                arr3.push('')
+                arr3.push(' ')
             }
             else if (fild1.children[i].children[j].textContent !== ' ') {
                 arr3.push(fild1.children[i].children[j].textContent)

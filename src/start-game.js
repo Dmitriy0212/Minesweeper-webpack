@@ -10,7 +10,6 @@ export default function start(numberOfRows, numberOfBomb) {
   const mas = [...Array(numberOfRows * numberOfRows).keys()]
     .sort(() => Math.random() - 0.5)
     .slice(0, Number(numberOfBomb))
-    debugger
   if (fild.children.length > 0) {
     for (let i = 0; i < fild.children.length;) {
       fild.removeChild(fild.children[i]);

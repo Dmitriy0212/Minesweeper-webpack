@@ -231,7 +231,6 @@ buttonDeleteSave.addEventListener("click", () => {
 menu.appendChild(buttonDeleteSave)
 
 spunTheme.addEventListener("click", () => {
-    debugger
     if (spunLevel.classList.length == 1) {
         spunThemeThis.textContent = 'Light'
         theme(spunLevel)
@@ -271,7 +270,6 @@ export function timerGame() {
 let obj1 = JSON.stringify(localStorage);
 let obj2 = JSON.parse(obj1);
 for (let key in obj2) {
-    debugger
     if (String(key).includes('Save') !== true) {
         continue
     }

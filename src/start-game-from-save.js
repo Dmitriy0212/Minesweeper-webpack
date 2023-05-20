@@ -29,7 +29,6 @@ export default function startFromSave(arr1, arr2, arr3, rows, arr4) {
             let obj2 = JSON.parse(obj1);
             button.innerHTML = obj2
           }
-          debugger
           button.className = arr2[count]
           button.oncontextmenu = "event.preventDefault()"
           let img = document.createElement('img')

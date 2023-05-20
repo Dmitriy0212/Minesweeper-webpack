@@ -22,7 +22,7 @@ export default function localStorageGetSave() {
                 arr2.push('')
             }
             if (fild1.children[i].children[j].textContent == ' ') {
-                arr3.push('')
+                arr3.push(' ')
             }
             else if (fild1.children[i].children[j].textContent !== ' ') {
                 arr3.push(fild1.children[i].children[j].textContent)
@@ -53,7 +53,6 @@ export default function localStorageGetSave() {
     }
     let objJson1;
     for (let key in objJson3) {
-        debugger
         if (String(key).includes('Save') == true) {
             let object2 = JSON.parse(objJson3[key]);
             object2.obgAll.obgSaveRest.splice(0, 1, obgSaveForRes)
