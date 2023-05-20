@@ -1,13 +1,13 @@
 import { mas } from "./index";
 import { timer } from "./index";
 import { numberClicks } from "./index";
-import { numberOfRows } from "./index";
 import ifLocalStorageLength from "./if-local-storage-length-0";
 export default function localStorageGetSave() {
     let obgSaveForRes = {
-        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: ''
+        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: []
     }
     let arr1 = [];
+    let arr2 = [];
     let arr3 = [];
     let arr4 = [];
     let level = document.querySelector('#level')
@@ -15,6 +15,13 @@ export default function localStorageGetSave() {
     for (let i = 0; i < fild1.children.length; i++) {
         for (let j = 0; j < fild1.children[i].children.length; j++) {
             arr1.push(fild1.children[i].children[j].className)
+            if (fild1.children[i].children[j].children[0] !== undefined) {
+                console.log(fild1.children[i].children[j].children[0].outerHTML)
+                arr2.push(fild1.children[i].children[j].children[0].outerHTML)
+            }
+            else if (fild1.children[i].children[j].children[0] == undefined) {
+                arr2.push('')
+            }
             arr3.push(fild1.children[i].children[j].textContent)
             arr4.push(fild1.children[i].children[j].style.color)
         }
@@ -28,10 +35,11 @@ export default function localStorageGetSave() {
     obgSaveForRes.clicks = numberClicks.textContent
     obgSaveForRes.numberRous = fild1.children.length;
     obgSaveForRes.levelThis = level.textContent;
+    obgSaveForRes.masArt = arr2;
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
-
+    debugger
     localStorage.clear()
     for (let key in objJson3) {
         if (String(key).includes('Save') !== true) {
@@ -42,6 +50,7 @@ export default function localStorageGetSave() {
     for (let key in objJson3) {
         if (String(key).includes('Save') == true) {
             let object2 = JSON.parse(objJson3[key]);
+            console.log(object2)
             object2.obgAll.obgSaveRest.splice(0, 1, obgSaveForRes)
             objJson1 = JSON.stringify(object2);
             localStorage.setItem('Save', objJson1);

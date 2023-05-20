@@ -1,12 +1,17 @@
 import { mas } from "./index"
 import { timerId } from "./index";
-import { numberOfRows } from "./index"
 import clearSaveRest from "./clear-the-history"
 import { spunLevelThis } from "./index"
+import { conteinerGame } from "./index"
 export default function bombIn() {
 	clearSaveRest()
 	clearInterval(timerId);
 	let c = 0
+	let restart = document.createElement('div')
+	restart.className = 'restart-fool'
+	restart.id = 'restart'
+	restart.textContent = 'Game over. Try again'
+	conteinerGame.appendChild(restart)
 	let fild1 = document.querySelector('.fild')
 	for (let i = 0; i < fild1.children.length; i++) {
 		for (let j = 0; j < fild1.children[i].children.length; j++) {
@@ -15,13 +20,22 @@ export default function bombIn() {
 			fild1.children[i].children[j].disabled = true
 			for (let count in mas) {
 				if (mas[count] == a) {
-					fild1.children[i].children[j].textContent = 'x'
+					debugger
+					if (fild1.children[i].children[j].children.length > 0) {
+						for (let n = 0; n < fild1.children[i].children[j].children.length;) {
+							fild1.children[i].children[j].removeChild(fild1.children[i].children[j].children[n]);
+						}
+					}
+					let img = document.createElement('img')
+					img.src = "./art/bomb.png"
+					img.style = 'width: inherit;height: inherit;'
+					fild1.children[i].children[j].appendChild(img)
 					fild1.children[i].children[j].className = 'button-bomb' + '-' + spunLevelThis.textContent.toLowerCase()
 					fild1.children[i].children[j].disabled = true
 				}
 			}
 		}
-		c += numberOfRows
+		c += fild1.children.length
 	}
 	return
 }

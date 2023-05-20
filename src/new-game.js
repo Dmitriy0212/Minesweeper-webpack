@@ -3,9 +3,12 @@ import { timer } from "./index"
 import { timerGame } from "./index"
 import { fild } from "./index"
 import clickButton from "./click-button"
+import clearSaveRest from "./clear-the-history"
 import { spunLevelThis } from "./index"
 import { conteinerGame } from "./index"
-export default function restart() {
+import { numberOfBomb } from "./index"
+export default function newGame() {
+  clearSaveRest()
   if (conteinerGame.children.length > 2) {
     let nested = document.getElementById("restart");
     conteinerGame.removeChild(nested);
@@ -16,6 +19,10 @@ export default function restart() {
       fild.removeChild(fild.children[i]);
     }
   }
+  const mas = [...Array(namb * namb).keys()]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, Number(numberOfBomb))
+
   numberClicks.textContent = 0
   timer.textContent = 0;
   for (let i = 0; i < Number(namb); i++) {
@@ -50,4 +57,5 @@ export default function restart() {
       rou.appendChild(button)
     }
   }
+  return mas
 }

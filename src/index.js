@@ -2,12 +2,13 @@ import toDoList from "./select-save";
 import restart from "./restart";
 import start from "./start-game";
 import localStorageSave from "./local-storage-save";
-import { masTo } from "./local-storage-save";
+import localStorageGetSave from "./local-storage-get-save";
 import startFromSave from "./start-game-from-save";
 import clearSaveRest from "./clear-the-history";
+import newGame from "./new-game";
 export let numberOfRows = 10;
-export let numberOfBomb = 4;
-
+export let numberOfBomb = 10;
+export let mas = [];
 
 let arr = {
     'lou': 4,
@@ -49,7 +50,7 @@ let conteiner = document.createElement('div');
 conteiner.className = 'conteiner';
 body.appendChild(conteiner);
 
-let conteinerGame = document.createElement('div');
+export let conteinerGame = document.createElement('div');
 conteinerGame.className = 'conteiner__game';
 conteiner.appendChild(conteinerGame);
 
@@ -59,6 +60,7 @@ conteinerGame.appendChild(menu)
 
 let spunLevel = document.createElement('spun');
 spunLevel.textContent = 'Level'
+/*spunLevel.innerHTML='<img src="./art/checkbox.png" style="width: inherit; height: inherit;">'*/
 spunLevel.className = 'box';
 menu.appendChild(spunLevel)
 
@@ -70,37 +72,6 @@ spunLevel.appendChild(spunLevelThis)
 let spunLevelList = document.createElement('ul');
 spunLevelList.className = 'menu__list';
 spunLevel.appendChild(spunLevelList)
-
-spunLevel.addEventListener('click', function () {
-    if (spunLevelList.children.length == 0) {
-        spunLevelList.textContent = 'Add level'
-        for (let index in arr) {
-            let spunLeveItem = document.createElement('li');
-            spunLeveItem.textContent = index;
-            spunLeveItem.className = 'menu__item';
-            spunLeveItem.addEventListener('click', function () {
-                clearSaveRest()
-                clearInterval(timerId);
-                numberClicks.textContent = 0;
-                timer.textContent = 0;
-                spunLevelThis.textContent = this.textContent
-                for (let i = 0; i < fild.children.length;) {
-                    fild.removeChild(fild.children[i]);
-                }
-                numberOfRows = arr[this.textContent]
-                mas = start(arr[this.textContent], numberOfBomb)
-            });
-            spunLevelList.appendChild(spunLeveItem);
-        }
-    }
-    else if (spunLevelList.children.length > 0) {
-        spunLevelList.textContent = ''
-        for (let i = 0; i < spunLevelList.children.length;) {
-            spunLevelList.removeChild(spunLevelList.children[i]);
-        }
-    }
-    spunLevelList.classList.toggle('active');
-})
 
 let boxForNumberClicks = document.createElement('div')
 boxForNumberClicks.className = 'box';
@@ -119,19 +90,25 @@ timer.textContent = 0;
 boxForTimer.appendChild(timer)
 
 let buttonRest = document.createElement('button')
-buttonRest.textContent = String('RESTART')
+buttonRest.textContent = String('Restart')
 buttonRest.className = 'box';
-buttonRest.addEventListener("click", () => { clearInterval(timerId); return restart() })
+buttonRest.addEventListener("click", () => { clearInterval(timerId); restart() })
 menu.appendChild(buttonRest)
 
+let buttonNew = document.createElement('button')
+buttonNew.textContent = String('New game')
+buttonNew.className = 'box';
+buttonNew.addEventListener("click", () => { clearInterval(timerId); return mas = newGame() })
+menu.appendChild(buttonNew)
+
 let buttonSave = document.createElement('button')
-buttonSave.textContent = String('SAVE')
+buttonSave.textContent = String('Save')
 buttonSave.className = 'box';
 buttonSave.addEventListener("click", localStorageSave)
 menu.appendChild(buttonSave)
 
 let spunSave = document.createElement('spun');
-spunSave.textContent = 'Save'
+spunSave.textContent = 'Add save'
 spunSave.className = 'box';
 menu.appendChild(spunSave)
 
@@ -139,7 +116,53 @@ let spunSaveList = document.createElement('ul');
 spunSaveList.className = 'menu__list__save';
 spunSave.appendChild(spunSaveList)
 
+spunLevel.addEventListener('click', function () {
+    if (spunLevelList.children.length == 0) {
+        if (spunSaveList.children.length > 0) {
+            for (let i = 0; i < spunSaveList.children.length;) {
+                spunSaveList.removeChild(spunSaveList.children[i]);
+            }
+            spunSaveList.classList.toggle('active');
+        }
+        for (let index in arr) {
+            let spunLeveItem = document.createElement('li');
+            spunLeveItem.textContent = index;
+            spunLeveItem.className = 'menu__item';
+            spunLeveItem.addEventListener('click', function () {
+                if (conteinerGame.children.length > 2) {
+                    let nested = document.getElementById("restart");
+                    conteinerGame.removeChild(nested);
+                }
+                clearSaveRest()
+                clearInterval(timerId);
+                numberClicks.textContent = 0;
+                timer.textContent = 0;
+                spunLevelThis.textContent = this.textContent
+                for (let i = 0; i < fild.children.length;) {
+                    fild.removeChild(fild.children[i]);
+                }
+                numberOfRows = arr[this.textContent]
+                mas = start(arr[this.textContent], numberOfBomb)
+                localStorageGetSave()
+            });
+            spunLevelList.appendChild(spunLeveItem);
+        }
+    }
+    else if (spunLevelList.children.length > 0) {
+        for (let i = 0; i < spunLevelList.children.length;) {
+            spunLevelList.removeChild(spunLevelList.children[i]);
+        }
+    }
+    spunLevelList.classList.toggle('active');
+})
+
 spunSave.addEventListener('click', function () {
+    if (spunLevelList.children.length > 0) {
+        for (let i = 0; i < spunLevelList.children.length;) {
+            spunLevelList.removeChild(spunLevelList.children[i]);
+        }
+        spunLevelList.classList.toggle('active');
+    }
     let masItem = []
 
     let objItem1 = JSON.stringify(localStorage);
@@ -151,14 +174,13 @@ spunSave.addEventListener('click', function () {
         }
         else if (String(key).includes('Save') == true) {
             let objItem3 = JSON.parse(objItem2[key]);
-            for (let key1 in objItem3.obgAll.obgSave) {
-                let item = objItem3.obgAll.obgSave[key1]
+            for (let key1 in objItem3.obgAll.masStatist) {
+                let item = objItem3.obgAll.masStatist[key1]
                 masItem.push(item)
             }
         }
     }
     if (spunSaveList.classList.length == 1) {
-        spunSaveList.textContent = 'Add save'
         for (let index in masItem) {
             let spunSaveItem = document.createElement('li');
             spunSaveItem.textContent = masItem[index].save;
@@ -168,8 +190,7 @@ spunSave.addEventListener('click', function () {
         }
     }
     else if (spunSaveList.classList.length > 1) {
-        spunSaveList.textContent = ''
-        for (let i = 0; i < spunLevelList.children.length;) {
+        for (let i = 0; i < spunSaveList.children.length;) {
             spunSaveList.removeChild(spunSaveList.children[i]);
         }
     }
@@ -196,12 +217,11 @@ export function timerGame() {
     }, 1000)
 }
 
-export let mas = [];
-
 
 let obj1 = JSON.stringify(localStorage);
 let obj2 = JSON.parse(obj1);
 for (let key in obj2) {
+    debugger
     if (String(key).includes('Save') !== true) {
         continue
     }
@@ -211,14 +231,19 @@ for (let key in obj2) {
             mas = start(numberOfRows, numberOfBomb)
             break;
         }
-        console.log(obj.obgAll.obgSaveRest[0].numberRous)
-        spunLevelThis.textContent=obj.obgAll.obgSaveRest[0].levelThis
+        console.log(obj.obgAll.obgSaveRest[0].masArt)
+        spunLevelThis.textContent = obj.obgAll.obgSaveRest[0].levelThis
         timer.textContent = obj.obgAll.obgSaveRest[0].time
         numberClicks.textContent = obj.obgAll.obgSaveRest[0].clicks
-        mas = obj.obgAll.obgSaveRest[0].masBomb
-        startFromSave(obj.obgAll.obgSaveRest[0].masValue, obj.obgAll.obgSaveRest[0].masStyle, obj.obgAll.obgSaveRest[0].colorValue, obj.obgAll.obgSaveRest[0].numberRous)
+        for(let key2 in obj.obgAll.obgSaveRest[0].masBomb){
+            mas.splice(key2, 1, obj.obgAll.obgSaveRest[0].masBomb[key2])
+        }
+        /*mas = obj.obgAll.obgSaveRest[0].masBomb*/
+        startFromSave(obj.obgAll.obgSaveRest[0].masValue, obj.obgAll.obgSaveRest[0].masStyle, obj.obgAll.obgSaveRest[0].colorValue, obj.obgAll.obgSaveRest[0].numberRous,obj.obgAll.obgSaveRest[0].masArt)
     }
 }
 if (objJson3.Save == undefined) {
+    console.log('1')
+    debugger
     mas = start(numberOfRows, numberOfBomb)
 }
