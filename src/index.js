@@ -6,6 +6,7 @@ import localStorageGetSave from "./local-storage-get-save";
 import startFromSave from "./start-game-from-save";
 import clearSaveRest from "./clear-the-history";
 import newGame from "./new-game";
+import closeWimd from "./close-wind";
 export let numberOfRows = 10;
 export let numberOfBomb = 10;
 export let mas = [];
@@ -59,9 +60,8 @@ menu.className = 'menu';
 conteinerGame.appendChild(menu)
 
 let spunLevel = document.createElement('spun');
-spunLevel.textContent = 'Level'
-/*spunLevel.innerHTML='<img src="./art/checkbox.png" style="width: inherit; height: inherit;">'*/
 spunLevel.className = 'box';
+spunLevel.textContent = 'Level'
 menu.appendChild(spunLevel)
 
 export let spunLevelThis = document.createElement('spun');
@@ -69,7 +69,7 @@ spunLevelThis.textContent = 'Easy'
 spunLevelThis.id = 'level';
 spunLevel.appendChild(spunLevelThis)
 
-let spunLevelList = document.createElement('ul');
+export let spunLevelList = document.createElement('ul');
 spunLevelList.className = 'menu__list';
 spunLevel.appendChild(spunLevelList)
 
@@ -108,22 +108,17 @@ buttonSave.addEventListener("click", localStorageSave)
 menu.appendChild(buttonSave)
 
 let spunSave = document.createElement('spun');
-spunSave.textContent = 'Add save'
+spunSave.textContent = 'Win statistics'
 spunSave.className = 'box';
 menu.appendChild(spunSave)
 
-let spunSaveList = document.createElement('ul');
+export let spunSaveList = document.createElement('ul');
 spunSaveList.className = 'menu__list__save';
 spunSave.appendChild(spunSaveList)
 
 spunLevel.addEventListener('click', function () {
     if (spunLevelList.children.length == 0) {
-        if (spunSaveList.children.length > 0) {
-            for (let i = 0; i < spunSaveList.children.length;) {
-                spunSaveList.removeChild(spunSaveList.children[i]);
-            }
-            spunSaveList.classList.toggle('active');
-        }
+        closeWimd(spunSaveList)
         for (let index in arr) {
             let spunLeveItem = document.createElement('li');
             spunLeveItem.textContent = index;
@@ -157,14 +152,8 @@ spunLevel.addEventListener('click', function () {
 })
 
 spunSave.addEventListener('click', function () {
-    if (spunLevelList.children.length > 0) {
-        for (let i = 0; i < spunLevelList.children.length;) {
-            spunLevelList.removeChild(spunLevelList.children[i]);
-        }
-        spunLevelList.classList.toggle('active');
-    }
+    closeWimd(spunLevelList)
     let masItem = []
-
     let objItem1 = JSON.stringify(localStorage);
     let objItem2 = JSON.parse(objItem1);
 
@@ -183,7 +172,7 @@ spunSave.addEventListener('click', function () {
     if (spunSaveList.classList.length == 1) {
         for (let index in masItem) {
             let spunSaveItem = document.createElement('li');
-            spunSaveItem.textContent = masItem[index].save;
+            spunSaveItem.textContent = 'Time ' + masItem[index].time + ' clicks ' + masItem[index].clicks;
             spunSaveItem.className = 'menu__save__item';
             spunSaveItem.addEventListener('click', toDoList);
             spunSaveList.appendChild(spunSaveItem);
@@ -217,7 +206,8 @@ export function timerGame() {
     }, 1000)
 }
 
-
+/*body.addEventListener("click",closeWimd(spunSaveList))
+body.addEventListener("click",closeWimd(spunLevelList))*/
 let obj1 = JSON.stringify(localStorage);
 let obj2 = JSON.parse(obj1);
 for (let key in obj2) {
@@ -235,11 +225,11 @@ for (let key in obj2) {
         spunLevelThis.textContent = obj.obgAll.obgSaveRest[0].levelThis
         timer.textContent = obj.obgAll.obgSaveRest[0].time
         numberClicks.textContent = obj.obgAll.obgSaveRest[0].clicks
-        for(let key2 in obj.obgAll.obgSaveRest[0].masBomb){
+        for (let key2 in obj.obgAll.obgSaveRest[0].masBomb) {
             mas.splice(key2, 1, obj.obgAll.obgSaveRest[0].masBomb[key2])
         }
         /*mas = obj.obgAll.obgSaveRest[0].masBomb*/
-        startFromSave(obj.obgAll.obgSaveRest[0].masValue, obj.obgAll.obgSaveRest[0].masStyle, obj.obgAll.obgSaveRest[0].colorValue, obj.obgAll.obgSaveRest[0].numberRous,obj.obgAll.obgSaveRest[0].masArt)
+        startFromSave(obj.obgAll.obgSaveRest[0].masValue, obj.obgAll.obgSaveRest[0].masStyle, obj.obgAll.obgSaveRest[0].colorValue, obj.obgAll.obgSaveRest[0].numberRous, obj.obgAll.obgSaveRest[0].masArt)
     }
 }
 if (objJson3.Save == undefined) {

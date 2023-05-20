@@ -7,9 +7,7 @@ export default function ifLocalStorageLength() {
             obgSaveRest: [
                 { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [] }
             ],
-            masStatist: [
-                { save: '', time: '', clicks: '' }
-            ]
+            masStatist: []
         }
     };
     let arr1 = [];
@@ -22,7 +20,6 @@ export default function ifLocalStorageLength() {
         for (let j = 0; j < fild1.children[i].children.length; j++) {
             arr1.push(fild1.children[i].children[j].className)
             if (fild1.children[i].children[j].children[0] !== undefined) {
-                console.log(fild1.children[i].children[j].children[0].outerHTML)
                 arr2.push(fild1.children[i].children[j].children[0].outerHTML)
             }
             else if (fild1.children[i].children[j].children[0] == undefined) {
@@ -44,8 +41,6 @@ export default function ifLocalStorageLength() {
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
-    debugger
-    console.log(arr)
     localStorage.clear()
     for (let key in objJson3) {
         if (String(key).includes('Save') !== true) {

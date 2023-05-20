@@ -5,7 +5,12 @@ import { fild } from "./index"
 import clickButton from "./click-button"
 import { spunLevelThis } from "./index"
 import { conteinerGame } from "./index"
+import { spunSaveList } from "./index"
+import { spunLevelList } from "./index"
+import closeWimd from "./close-wind";
 export default function restart() {
+  closeWimd(spunSaveList)
+  closeWimd(spunLevelList)
   if (conteinerGame.children.length > 2) {
     let nested = document.getElementById("restart");
     conteinerGame.removeChild(nested);

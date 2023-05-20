@@ -8,8 +8,13 @@ import openUpToNumber from "./open-up-to-number"
 import openDounToNumber from "./open-doun-to-number"
 import { timerGame } from "./index"
 import localStorageGetSave from "./local-storage-get-save"
+import { spunSaveList } from "./index"
+import { spunLevelList } from "./index"
+import closeWimd from "./close-wind";
 export default function clickButton() {
-	
+	closeWimd(spunSaveList)
+	closeWimd(spunLevelList)
+
 	let but = this
 	let c = 0;
 	let fild1 = document.querySelector('.fild')
@@ -18,7 +23,7 @@ export default function clickButton() {
 			fild1.children[k].children[r].removeEventListener('click', timerGame);
 		}
 	}
-	
+
 	for (let i = 0; i < fild1.children.length; i++) {
 		for (let j = 0; j < fild1.children[i].children.length; j++) {
 			let a = c + j
@@ -51,7 +56,7 @@ export default function clickButton() {
 	}
 	setTimeout(() => {
 		numberClicks.textContent = Number(numberClicks.innerHTML) + 1;
-		fildClick(but,mas);
+		fildClick(but, mas);
 		openRiteToNumber(but)
 		openLeftToNumber(but)
 		openUpToNumber(but)

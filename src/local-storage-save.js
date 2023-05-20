@@ -27,11 +27,9 @@ export default function localStorageSave() {
     let level = document.querySelector('#level')
     let fild1 = document.querySelector('.fild')
     for (let i = 0; i < fild1.children.length; i++) {
-        debugger
         for (let j = 0; j < fild1.children[i].children.length; j++) {
             arr1.push(fild1.children[i].children[j].className)
             if (fild1.children[i].children[j].children[0] !== undefined) {
-                console.log(fild1.children[i].children[j].children[0].outerHTML)
                 arr2.push(fild1.children[i].children[j].children[0].outerHTML)
             }
             else if (fild1.children[i].children[j].children[0] == undefined) {
@@ -69,10 +67,8 @@ export default function localStorageSave() {
     arr.obgAll.obgSaveRest[0].levelThis = level.textContent;
     arr.obgAll.obgSaveRest[0].masArt = arr2;
 
-    /*localStorage.clear();*/
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
-    debugger
     localStorage.clear()
     for (let key in objJson3) {
         if (String(key).includes('Save') !== true) {

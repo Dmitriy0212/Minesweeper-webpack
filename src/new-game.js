@@ -7,7 +7,12 @@ import clearSaveRest from "./clear-the-history"
 import { spunLevelThis } from "./index"
 import { conteinerGame } from "./index"
 import { numberOfBomb } from "./index"
+import { spunSaveList } from "./index"
+import { spunLevelList } from "./index"
+import closeWimd from "./close-wind";
 export default function newGame() {
+  closeWimd(spunSaveList)
+  closeWimd(spunLevelList)
   clearSaveRest()
   if (conteinerGame.children.length > 2) {
     let nested = document.getElementById("restart");

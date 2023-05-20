@@ -20,7 +20,6 @@ export default function bombIn() {
 			fild1.children[i].children[j].disabled = true
 			for (let count in mas) {
 				if (mas[count] == a) {
-					debugger
 					if (fild1.children[i].children[j].children.length > 0) {
 						for (let n = 0; n < fild1.children[i].children[j].children.length;) {
 							fild1.children[i].children[j].removeChild(fild1.children[i].children[j].children[n]);
