@@ -21,7 +21,7 @@ export default function fild (d,event) {
         case 7:
             event.style = 'color: #00054f'
             break;
-        case numberOfRows:
+        case 8:
             event.style = 'color: #4f0000'
             break;
         default:

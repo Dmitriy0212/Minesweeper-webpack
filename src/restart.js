@@ -2,6 +2,7 @@ import { numberClicks } from "./index"
 import { timer } from "./index"
 import { timerGame } from "./index"
 import { fild } from "./index"
+import { numberOfBomb } from "./index"
 import clickButton from "./click-button"
 import { spunLevelThis } from "./index"
 import { conteinerGame } from "./index"
@@ -10,7 +11,14 @@ import { spunLevelList } from "./index"
 import closeWimd from "./close-wind";
 import soundFlag from "./flag";
 import { soundOn } from "./index"
+import flegInBomb from "./fleg-in-bomb";
+import flegOffBomb from "./fleg-off-bomb";
+import { spunFregIs } from "./index"
+import { spunBombIs } from "./index"
+import localStorageGetSave from "./local-storage-get-save"
 export default function restart() {
+  spunBombIs.textContent = numberOfBomb
+  spunFregIs.textContent = 0
   closeWimd(spunSaveList)
   closeWimd(spunLevelList)
   if (conteinerGame.children.length > 2) {
@@ -36,6 +44,7 @@ export default function restart() {
       button.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
       let img = document.createElement('img')
       button.addEventListener("contextmenu", function (event) {
+        flegInBomb(this)
         if(soundOn==1){
           soundFlag()
         }
@@ -44,16 +53,21 @@ export default function restart() {
           img.src = "./art/checkbox.png"
           img.style = 'width: inherit;height: inherit;'
           this.appendChild(img)
+          this.disabled = true
           this.className = 'button-rite' + '-' + spunLevelThis.textContent.toLowerCase()
         }
+        localStorageGetSave()
       });
       img.addEventListener("contextmenu", function (event) {
+        flegOffBomb(this.parentNode)
         if(soundOn==1){
           soundFlag()
         }
         event.stopPropagation()
+        this.parentNode.disabled = false
         this.parentNode.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
         this.parentNode.removeChild(this)
+        localStorageGetSave()
         event.preventDefault();
       })
       button.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()

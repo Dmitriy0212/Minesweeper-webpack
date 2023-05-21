@@ -2,9 +2,11 @@ import { mas } from "./index";
 import { timer } from "./index";
 import { numberClicks } from "./index";
 import ifLocalStorageLength from "./if-local-storage-length-0";
+import { spunBombIs } from "./index";
+import { spunFregIs } from "./index";
 export default function localStorageGetSave() {
     let obgSaveForRes = {
-        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: []
+        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: ''
     }
     let arr1 = [];
     let arr2 = [];
@@ -40,6 +42,8 @@ export default function localStorageGetSave() {
     obgSaveForRes.numberRous = fild1.children.length;
     obgSaveForRes.levelThis = level.textContent;
     obgSaveForRes.masArt = arr2;
+    obgSaveForRes.valueFleg = spunFregIs.textContent;
+    obgSaveForRes.valueBomb = spunBombIs.textContent;
 
 
 

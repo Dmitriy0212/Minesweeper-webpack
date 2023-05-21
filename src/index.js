@@ -12,9 +12,9 @@ export let mas = [];
 export let soundOn = 1;
 
 let arr = {
-    'Easy': 10,
-    'Difficult': 15,
-    'Advanced': 25
+    'Easy': [10, 10],
+    'Difficult': [15, 40],
+    'Advanced': [25, 99]
 };
 
 export let arr2 = []
@@ -54,9 +54,33 @@ export let conteinerGame = document.createElement('div');
 conteinerGame.className = 'conteiner__game';
 conteiner.appendChild(conteinerGame);
 
+export let conteinerMenu = document.createElement('div');
+conteinerMenu.className = 'conteiner__game';
+conteinerGame.appendChild(conteinerMenu);
+
 let menu = document.createElement('div')
 menu.className = 'menu';
-conteinerGame.appendChild(menu)
+conteinerMenu.appendChild(menu)
+
+export let conteinerValue = document.createElement('div');
+conteinerValue.className = 'conteiner-value';
+conteinerMenu.appendChild(conteinerValue);
+
+export let pBombIs = document.createElement('spun');
+pBombIs.textContent = 'Bombs left '
+export let pFregIs = document.createElement('spun');
+pFregIs.textContent = 'Flags set '
+conteinerValue.appendChild(pBombIs);
+conteinerValue.appendChild(pFregIs);
+
+export let spunBombIs = document.createElement('spun');
+export let spunFregIs = document.createElement('spun');
+
+pBombIs.className = 'value__spun';
+pBombIs.appendChild(spunBombIs)
+
+pFregIs.className = 'value__spun';
+pFregIs.appendChild(spunFregIs)
 
 let spunLevel = document.createElement('spun');
 spunLevel.className = 'box';
@@ -69,13 +93,17 @@ menu.appendChild(numberBombInput)
 
 let bombInput = document.createElement('input');
 bombInput.value = numberOfBomb
+spunBombIs.textContent = bombInput.value
+spunFregIs.textContent = 0
 numberBombInput.appendChild(bombInput)
 let bombButton = document.createElement('button');
 bombButton.style = 'font-size: 70%;padding: 0;'
 bombButton.textContent = 'Add bomb'
 bombButton.addEventListener("click", () => {
+    spunFregIs.textContent = 0
     let arr = []
     numberOfBomb = bombInput.value
+    spunBombIs.textContent = bombInput.value
     arr = start(numberOfRows, numberOfBomb)
     mas = []
     for (let key2 in arr) {
@@ -165,9 +193,12 @@ spunLevel.addEventListener('click', function () {
                 for (let i = 0; i < fild.children.length;) {
                     fild.removeChild(fild.children[i]);
                 }
-                numberOfRows = arr[this.textContent]
-                mas = start(arr[this.textContent], numberOfBomb)
-                localStorageGetSave()
+                spunFregIs.textContent = 0
+                numberOfRows = arr[this.textContent][0];
+                numberOfBomb = arr[this.textContent][1];
+                bombInput.value = arr[this.textContent][1];
+                spunBombIs.textContent = arr[this.textContent][1];
+                mas = start(arr[this.textContent][0], arr[this.textContent][1])
             });
             spunLevelList.appendChild(spunLeveItem);
         }
@@ -225,13 +256,13 @@ let buttonDeleteSave = document.createElement('button')
 buttonDeleteSave.textContent = 'Sound on'
 buttonDeleteSave.className = 'box';
 buttonDeleteSave.addEventListener("click", () => {
-    if(soundOn==1){
+    if (soundOn == 1) {
         buttonDeleteSave.textContent = 'Sound off'
-        soundOn=0
+        soundOn = 0
     }
-    else if(soundOn==0){
+    else if (soundOn == 0) {
         buttonDeleteSave.textContent = 'Sound on'
-        soundOn=1
+        soundOn = 1
     }
 })
 menu.appendChild(buttonDeleteSave)
@@ -276,6 +307,7 @@ export function timerGame() {
 let obj1 = JSON.stringify(localStorage);
 let obj2 = JSON.parse(obj1);
 for (let key in obj2) {
+    spunFregIs.textContent = 0
     if (String(key).includes('Save') !== true) {
         continue
     }
@@ -285,6 +317,8 @@ for (let key in obj2) {
             mas = start(numberOfRows, numberOfBomb)
             break;
         }
+        spunBombIs.textContent = obj.obgAll.obgSaveRest[0].valueBomb
+        spunFregIs.textContent = obj.obgAll.obgSaveRest[0].valueFleg
         spunLevelThis.textContent = obj.obgAll.obgSaveRest[0].levelThis
         timer.textContent = obj.obgAll.obgSaveRest[0].time
         numberClicks.textContent = obj.obgAll.obgSaveRest[0].clicks
@@ -297,5 +331,6 @@ for (let key in obj2) {
     }
 }
 if (objJson3.Save == undefined) {
+    spunFregIs.textContent = 0
     mas = start(numberOfRows, numberOfBomb)
 }

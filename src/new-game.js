@@ -12,7 +12,14 @@ import { spunLevelList } from "./index"
 import closeWimd from "./close-wind";
 import soundFlag from "./flag";
 import { soundOn } from "./index"
+import flegInBomb from "./fleg-in-bomb";
+import flegOffBomb from "./fleg-off-bomb";
+import { spunFregIs } from "./index"
+import { spunBombIs } from "./index"
+import localStorageGetSave from "./local-storage-get-save"
 export default function newGame() {
+  spunBombIs.textContent = numberOfBomb
+  spunFregIs.textContent = 0
   closeWimd(spunSaveList)
   closeWimd(spunLevelList)
   clearSaveRest()
@@ -26,10 +33,18 @@ export default function newGame() {
       fild.removeChild(fild.children[i]);
     }
   }
-  const mas = [...Array(namb * namb).keys()]
+  let mas = [...Array(namb * namb).keys()]
     .sort(() => Math.random() - 0.5)
     .slice(0, Number(numberOfBomb))
-
+  mas.sort(function (a, b) {
+    if (a > b) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
+    return 0;
+  });
   numberClicks.textContent = 0
   timer.textContent = 0;
   for (let i = 0; i < Number(namb); i++) {
@@ -43,24 +58,30 @@ export default function newGame() {
       button.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
       let img = document.createElement('img')
       button.addEventListener("contextmenu", function (event) {
-        if(soundOn==1){
+        flegInBomb(this)
+        if (soundOn == 1) {
           soundFlag()
         }
         if (event.currentTarget.className !== ('button-rite' + '-' + spunLevelThis.textContent.toLowerCase())) {
           event.preventDefault();
           img.src = "./art/checkbox.png"
           img.style = 'width: inherit;height: inherit;'
+          this.disabled = true
           this.appendChild(img)
           this.className = 'button-rite' + '-' + spunLevelThis.textContent.toLowerCase()
         }
+        localStorageGetSave()
       });
       img.addEventListener("contextmenu", function (event) {
-        if(soundOn==1){
+        flegOffBomb(this.parentNode)
+        if (soundOn == 1) {
           soundFlag()
         }
         event.stopPropagation()
+        this.parentNode.disabled = false
         this.parentNode.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
         this.parentNode.removeChild(this)
+        localStorageGetSave()
         event.preventDefault();
       })
       button.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()

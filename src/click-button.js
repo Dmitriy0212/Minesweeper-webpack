@@ -36,7 +36,14 @@ export default function clickButton() {
 				if (mas[count] == a) {
 					if (numberClicks.textContent == 0) {
 						if (this == fild1.children[i].children[j]) {
-							mas.splice(count, 1, mas[count] + 1)
+							if (mas[count] == (fild1.children.length * fild1.children.length - 1)) {
+								mas.splice(count, 1, mas[count] - 1)
+								func2();
+							}
+							else if (mas[count] <= (fild1.children.length * fild1.children.length - 1)) {
+								mas.splice(count, 1, mas[count] + 1)
+								func();
+							}
 							function func() {
 								let d = 0;
 								for (let count1 in mas) {
@@ -50,7 +57,19 @@ export default function clickButton() {
 								}
 								return
 							}
-							func();
+							function func2() {
+								let d = 0;
+								for (let count1 in mas) {
+									if (mas[count1] == mas[count]) {
+										d++
+										if (d > 1) {
+											mas.splice(count, 1, mas[count1] - 1)
+											return func2()
+										}
+									}
+								}
+								return
+							}
 						}
 					}
 				}

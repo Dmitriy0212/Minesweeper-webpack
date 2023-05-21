@@ -6,11 +6,23 @@ import clickButton from "./click-button"
 import { spunLevelThis } from "./index"
 import localStorageGetSave from "./local-storage-get-save"
 import soundFlag from "./flag";
+import flegInBomb from "./fleg-in-bomb";
+import flegOffBomb from "./fleg-off-bomb";
 import { soundOn } from "./index"
 export default function start(numberOfRows, numberOfBomb) {
-  const mas = [...Array(numberOfRows * numberOfRows).keys()]
+  let mas = [...Array(numberOfRows * numberOfRows).keys()]
     .sort(() => Math.random() - 0.5)
     .slice(0, Number(numberOfBomb))
+
+  mas.sort(function (a, b) {
+    if (a > b) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
+    return 0;
+  });
   if (fild.children.length > 0) {
     for (let i = 0; i < fild.children.length;) {
       fild.removeChild(fild.children[i]);
@@ -28,7 +40,8 @@ export default function start(numberOfRows, numberOfBomb) {
       button.oncontextmenu = "event.preventDefault()"
       let img = document.createElement('img')
       button.addEventListener("contextmenu", function (event) {
-        if(soundOn==1){
+        flegInBomb(this)
+        if (soundOn == 1) {
           soundFlag()
         }
         if (event.currentTarget.className !== ('button-rite' + '-' + spunLevelThis.textContent.toLowerCase())) {
@@ -36,16 +49,19 @@ export default function start(numberOfRows, numberOfBomb) {
           img.src = "./art/checkbox.png"
           img.style = 'width: inherit;height: inherit;'
           this.appendChild(img)
+          this.disabled = true
           this.className = 'button-rite' + '-' + spunLevelThis.textContent.toLowerCase()
-          localStorageGetSave()
         }
+        localStorageGetSave()
       });
       img.addEventListener("contextmenu", function (event) {
-        if(soundOn==1){
+        flegOffBomb(this.parentNode)
+        if (soundOn == 1) {
           soundFlag()
         }
         event.stopPropagation()
         this.parentNode.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
+        this.parentNode.disabled = false
         this.parentNode.removeChild(this)
         localStorageGetSave()
         event.preventDefault();

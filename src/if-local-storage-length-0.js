@@ -1,11 +1,13 @@
 import { mas } from "./index";
 import { timer } from "./index";
 import { numberClicks } from "./index";
+import { spunBombIs } from "./index";
+import { spunFregIs } from "./index";
 export default function ifLocalStorageLength() {
     let arr = {
         obgAll: {
             obgSaveRest: [
-                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [] }
+                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: '' }
             ],
             masStatist: []
         }
@@ -34,7 +36,7 @@ export default function ifLocalStorageLength() {
             arr4.push(fild1.children[i].children[j].style.color)
         }
     }
-    
+
     arr.obgAll.obgSaveRest[0].masBomb = mas;
     arr.obgAll.obgSaveRest[0].masStyle = arr1
     arr.obgAll.obgSaveRest[0].masValue = arr3
@@ -44,6 +46,8 @@ export default function ifLocalStorageLength() {
     arr.obgAll.obgSaveRest[0].numberRous = fild1.children.length;
     arr.obgAll.obgSaveRest[0].levelThis = level.textContent;
     arr.obgAll.obgSaveRest[0].masArt = arr2;
+    arr.obgAll.obgSaveRest[0].valueFleg = spunFregIs.textContent;
+    arr.obgAll.obgSaveRest[0].valueBomb = spunBombIs.textContent;
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);
