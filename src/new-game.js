@@ -11,6 +11,7 @@ import { spunSaveList } from "./index"
 import { spunLevelList } from "./index"
 import closeWimd from "./close-wind";
 import soundFlag from "./flag";
+import { soundOn } from "./index"
 export default function newGame() {
   closeWimd(spunSaveList)
   closeWimd(spunLevelList)
@@ -42,7 +43,9 @@ export default function newGame() {
       button.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
       let img = document.createElement('img')
       button.addEventListener("contextmenu", function (event) {
-        soundFlag()
+        if(soundOn==1){
+          soundFlag()
+        }
         if (event.currentTarget.className !== ('button-rite' + '-' + spunLevelThis.textContent.toLowerCase())) {
           event.preventDefault();
           img.src = "./art/checkbox.png"
@@ -52,7 +55,9 @@ export default function newGame() {
         }
       });
       img.addEventListener("contextmenu", function (event) {
-        soundFlag()
+        if(soundOn==1){
+          soundFlag()
+        }
         event.stopPropagation()
         this.parentNode.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
         this.parentNode.removeChild(this)

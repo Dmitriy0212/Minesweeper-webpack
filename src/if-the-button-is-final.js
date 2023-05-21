@@ -7,6 +7,7 @@ import { conteinerGame } from "./index"
 import clearSaveRest from "./clear-the-history";
 import localStorageSave from "./local-storage-save";
 import soundHolla from "./sound-holla";
+import { soundOn } from "./index"
 export default function ifTheButtonIsFinal(mas) {
 	let b = 0;
 	let d = 0;
@@ -52,7 +53,9 @@ export default function ifTheButtonIsFinal(mas) {
 					conteinerGame.appendChild(restart)
 					clearSaveRest()
 					clearInterval(timerId);
-					soundHolla()
+					if (soundOn == 1) {
+						soundHolla()
+					}
 					return
 				}
 			}

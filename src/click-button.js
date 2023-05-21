@@ -12,10 +12,13 @@ import { spunSaveList } from "./index"
 import { spunLevelList } from "./index"
 import closeWimd from "./close-wind";
 import soundClick from "./sound-click";
+import { soundOn } from "./index"
 export default function clickButton() {
 	closeWimd(spunSaveList)
 	closeWimd(spunLevelList)
-	soundClick()
+	if (soundOn == 1) {
+		soundClick()
+	}
 
 	let but = this
 	let c = 0;

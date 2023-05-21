@@ -4,6 +4,7 @@ import clearSaveRest from "./clear-the-history"
 import { spunLevelThis } from "./index"
 import { conteinerGame } from "./index"
 import soundLoad from "./sound-load"
+import { soundOn } from "./index"
 export default function bombIn() {
 	clearSaveRest()
 	clearInterval(timerId);
@@ -13,7 +14,9 @@ export default function bombIn() {
 	restart.id = 'restart'
 	restart.textContent = 'Game over. Try again'
 	conteinerGame.appendChild(restart)
-	soundLoad()
+	if (soundOn == 1) {
+		soundLoad()
+	}
 	let fild1 = document.querySelector('.fild')
 	for (let i = 0; i < fild1.children.length; i++) {
 		for (let j = 0; j < fild1.children[i].children.length; j++) {

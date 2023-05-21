@@ -1,4 +1,3 @@
-import toDoList from "./select-save";
 import restart from "./restart";
 import start from "./start-game";
 import localStorageGetSave from "./local-storage-get-save";
@@ -10,9 +9,9 @@ import theme from "./theme";
 export let numberOfRows = 10;
 export let numberOfBomb = 10;
 export let mas = [];
+export let soundOn = 1;
 
 let arr = {
-    'lou': 4,
     'Easy': 10,
     'Difficult': 15,
     'Advanced': 25
@@ -72,7 +71,7 @@ let bombInput = document.createElement('input');
 bombInput.value = numberOfBomb
 numberBombInput.appendChild(bombInput)
 let bombButton = document.createElement('button');
-bombButton.style = 'font-size: 50%;'
+bombButton.style = 'font-size: 70%;padding: 0;'
 bombButton.textContent = 'Add bomb'
 bombButton.addEventListener("click", () => {
     let arr = []
@@ -223,10 +222,17 @@ fild.className = 'fild'
 conteinerGame.appendChild(fild)
 
 let buttonDeleteSave = document.createElement('button')
-buttonDeleteSave.textContent = String('Delete save')
+buttonDeleteSave.textContent = 'Sound on'
 buttonDeleteSave.className = 'box';
 buttonDeleteSave.addEventListener("click", () => {
-    localStorage.clear();
+    if(soundOn==1){
+        buttonDeleteSave.textContent = 'Sound off'
+        soundOn=0
+    }
+    else if(soundOn==0){
+        buttonDeleteSave.textContent = 'Sound on'
+        soundOn=1
+    }
 })
 menu.appendChild(buttonDeleteSave)
 

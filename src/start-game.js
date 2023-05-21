@@ -6,6 +6,7 @@ import clickButton from "./click-button"
 import { spunLevelThis } from "./index"
 import localStorageGetSave from "./local-storage-get-save"
 import soundFlag from "./flag";
+import { soundOn } from "./index"
 export default function start(numberOfRows, numberOfBomb) {
   const mas = [...Array(numberOfRows * numberOfRows).keys()]
     .sort(() => Math.random() - 0.5)
@@ -27,7 +28,9 @@ export default function start(numberOfRows, numberOfBomb) {
       button.oncontextmenu = "event.preventDefault()"
       let img = document.createElement('img')
       button.addEventListener("contextmenu", function (event) {
-        soundFlag()
+        if(soundOn==1){
+          soundFlag()
+        }
         if (event.currentTarget.className !== ('button-rite' + '-' + spunLevelThis.textContent.toLowerCase())) {
           event.preventDefault();
           img.src = "./art/checkbox.png"
@@ -38,7 +41,9 @@ export default function start(numberOfRows, numberOfBomb) {
         }
       });
       img.addEventListener("contextmenu", function (event) {
-        soundFlag()
+        if(soundOn==1){
+          soundFlag()
+        }
         event.stopPropagation()
         this.parentNode.className = 'button' + '-' + spunLevelThis.textContent.toLowerCase()
         this.parentNode.removeChild(this)
