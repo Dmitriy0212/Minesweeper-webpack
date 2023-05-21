@@ -72,7 +72,8 @@ let bombInput = document.createElement('input');
 bombInput.value = numberOfBomb
 numberBombInput.appendChild(bombInput)
 let bombButton = document.createElement('button');
-bombButton.textContent = 'click'
+bombButton.style = 'font-size: 50%;'
+bombButton.textContent = 'Add bomb'
 bombButton.addEventListener("click", () => {
     let arr = []
     numberOfBomb = bombInput.value
@@ -203,7 +204,6 @@ spunStatistics.addEventListener('click', function () {
             let spunSaveItem = document.createElement('li');
             spunSaveItem.textContent = 'Time ' + masItem[index].time + ' clicks ' + masItem[index].clicks;
             spunSaveItem.className = 'menu__save__item';
-            spunSaveItem.addEventListener('click', toDoList);
             spunSaveList.appendChild(spunSaveItem);
         }
     }
@@ -282,8 +282,8 @@ for (let key in obj2) {
         spunLevelThis.textContent = obj.obgAll.obgSaveRest[0].levelThis
         timer.textContent = obj.obgAll.obgSaveRest[0].time
         numberClicks.textContent = obj.obgAll.obgSaveRest[0].clicks
-        numberOfBomb=obj.obgAll.obgSaveRest[0].masBomb.length
-        bombInput.value=obj.obgAll.obgSaveRest[0].masBomb.length
+        numberOfBomb = obj.obgAll.obgSaveRest[0].masBomb.length
+        bombInput.value = obj.obgAll.obgSaveRest[0].masBomb.length
         for (let key2 in obj.obgAll.obgSaveRest[0].masBomb) {
             mas.splice(key2, 1, obj.obgAll.obgSaveRest[0].masBomb[key2])
         }

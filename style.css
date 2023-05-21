@@ -4,7 +4,6 @@ li {
     list-style: none;
 }
 
-
 .fild {
     position: relative;
     display: flex;
@@ -14,6 +13,7 @@ li {
     flex-direction: column;
     border-radius: 3px;
 }
+
 .fild.active {
     position: relative;
     display: flex;
@@ -45,12 +45,11 @@ li {
 }
 
 .menu {
-    margin: 1%;
-    padding: 1%;
+    margin: 2%;
+    padding: 2%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-content: space-around;
 }
 
 .box {
@@ -59,7 +58,7 @@ li {
     padding: 0.5%;
     margin: 0.5%;
     text-align: center;
-    width: 60px;
+    width: 11%;
     color: rgb(255, 255, 255);
     background: #696969;
     font-size: 75%;
@@ -68,6 +67,13 @@ li {
     justify-content: center;
     border: 1px solid black;
     border-radius: 2px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+input {
+    text-align: center;
+    width: 90%;
 }
 
 .box:hover {
@@ -98,47 +104,19 @@ li {
     color: rgb(0, 0, 0);
     background: #ffffff;
 }
+
 .box.active:hover {
     background: #c4c4c4;
 }
 
 .select:hover {
-    background: #1d1d1d;
+    background: #5a5a5a;
 }
 
 .rou {
     display: flex;
     justify-content: space-around;
 }
-/*
-.button {
-    background: rgb(0 0 0 / 60%);
-    width: 40px;
-    height: 40px;
-}
-
-.button:hover {
-    background: rgb(5 69 23/ 60%);
-    border-radius: 3px;
-}
-
-.button-bomb {
-    background: rgb(255 0 0/ 60%);
-    width: 40px;
-    height: 40px;
-}
-
-.button-bomb-heppi {
-    background: rgb(0 255 64/ 60%);
-    width: 40px;
-    height: 40px;
-}
-
-.not-button-bomb {
-    background: rgb(255 255 255/ 60%);
-    width: 40px;
-    height: 40px;
-}*/
 
 .button-easy {
     background: rgb(0 0 0 / 60%);
@@ -180,6 +158,7 @@ li {
 .button-easy.active {
     background: #ffffff;
 }
+
 .button-easy.active:hover {
     background: #c4c4c4;
 }
@@ -224,6 +203,7 @@ li {
 .button-difficult.active {
     background: #ffffff;
 }
+
 .button-difficult.active:hover {
     background: #c4c4c4;
 }
@@ -268,6 +248,7 @@ li {
 .button-advanced.active {
     background: #ffffff;
 }
+
 .button-advanced.active:hover {
     background: #c4c4c4;
 }
@@ -304,10 +285,6 @@ li {
     align-content: center;
     justify-content: center;
 }
-
-/*.not-button-bomb:disabled {
-    background: rgb(255, 255, 255);
-    }*/
 
 .button-rite-lou {
     display: flex;
@@ -366,25 +343,28 @@ li {
 }
 
 .menu__list {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    height: 0px;
     position: absolute;
-    left: 0px;
-    top: 46px;
-    width: 0;
+    left: -40%;
+    top: 105%;
+    right: -40%;
     background: #696969;
 }
 
 .menu__list.active {
+    font-size: 105%;
     z-index: 1;
-    width: fit-content;
     display: flex;
     transition-duration: 1.0s;
     height: fit-content;
     border: 1px solid #000000;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: fit-content;
+    align-items: center;
 }
 
 .menu__item {
@@ -393,28 +373,31 @@ li {
 
 .menu__item:hover {
     background: #292929;
+    font-size: 140%;
 }
 
 .menu__list__save {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    height: 0px;
     position: absolute;
-    left: 0px;
-    top: 46px;
-    width: 0;
+    left: -60%;
+    top: 105%;
+    width: fit-content;
+    right: -60%;
     background: #696969;
 }
 
 .menu__list__save.active {
     z-index: 1;
-    width: fit-content;
     display: flex;
     transition-duration: 1.0s;
     height: fit-content;
     border: 1px solid #000000;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .menu__save__item {
@@ -570,7 +553,6 @@ li {
     }
 
     .box {
-        width: 50px;
         font-size: 55%;
     }
 }
@@ -626,7 +608,7 @@ li {
         width: 25px;
         height: 25px;
     }
-    
+
     .button-easy {
         width: 30px;
         height: 30px;
@@ -652,9 +634,6 @@ li {
         height: 30px;
     }
 
-    .box {
-        width: 50px;
-    }
 }
 
 @media (max-width:375px) {
@@ -684,7 +663,4 @@ li {
         height: 20px;
     }
 
-    .box {
-        width: 45px;
-    }
 }
