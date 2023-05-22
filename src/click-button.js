@@ -26,6 +26,7 @@ export default function clickButton() {
 	for (let k = 0; k < fild1.children.length; k++) {
 		for (let r = 0; r < fild1.children[k].children.length; r++) {
 			fild1.children[k].children[r].removeEventListener('click', timerGame);
+			fild1.children[k].children[r].removeEventListener('contextmenu', timerGame);
 		}
 	}
 

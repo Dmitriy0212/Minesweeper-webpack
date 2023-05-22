@@ -3,11 +3,13 @@ import { timer } from "./index";
 import { numberClicks } from "./index";
 import { spunBombIs } from "./index";
 import { spunFregIs } from "./index";
+import { spunThemeThis } from "./index";
+import { soundOn } from "./index";
 export default function ifLocalStorageLength() {
     let arr = {
         obgAll: {
             obgSaveRest: [
-                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: '' }
+                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: '', thisTheme: '', thisVolum: '' }
             ],
             masStatist: []
         }
@@ -48,6 +50,8 @@ export default function ifLocalStorageLength() {
     arr.obgAll.obgSaveRest[0].masArt = arr2;
     arr.obgAll.obgSaveRest[0].valueFleg = spunFregIs.textContent;
     arr.obgAll.obgSaveRest[0].valueBomb = spunBombIs.textContent;
+    arr.obgAll.obgSaveRest[0].thisTheme = spunThemeThis.textContent;
+    arr.obgAll.obgSaveRest[0].thisVolum = soundOn;
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);

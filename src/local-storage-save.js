@@ -3,6 +3,8 @@ import { timer } from "./index";
 import { numberClicks } from "./index";
 import { spunBombIs } from "./index";
 import { spunFregIs } from "./index";
+import { spunThemeThis } from "./index";
+import { soundOn } from "./index";
 export default function localStorageSave() {
     let today = new Date();
     let now = today.toLocaleString();
@@ -10,12 +12,16 @@ export default function localStorageSave() {
         save: '', time: '', clicks: ''
     }
     let obgSaveForRes = {
-        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: ''
+        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '',
+        numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: '', thisTheme: '', thisVolum: ''
     }
     let arr = {
         obgAll: {
             obgSaveRest: [
-                { masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: '' }
+                {
+                    masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '',
+                    numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: '', thisTheme: '', thisVolum: ''
+                }
             ],
             masStatist: [
                 { save: '', time: '', clicks: '' }
@@ -66,6 +72,8 @@ export default function localStorageSave() {
     obgSaveForRes.masArt = arr2;
     obgSaveForRes.valueFleg = spunFregIs.textContent;
     obgSaveForRes.valueBomb = spunBombIs.textContent;
+    obgSaveForRes.thisTheme = spunThemeThis.textContent;
+    obgSaveForRes.thisVolum = soundOn;
 
     arr.obgAll.obgSaveRest[0].masBomb = mas;
     arr.obgAll.obgSaveRest[0].masStyle = arr1
@@ -78,6 +86,8 @@ export default function localStorageSave() {
     arr.obgAll.obgSaveRest[0].masArt = arr2;
     arr.obgAll.obgSaveRest[0].valueFleg = spunFregIs.textContent;
     arr.obgAll.obgSaveRest[0].valueBomb = spunBombIs.textContent;
+    arr.obgAll.obgSaveRest[0].thisTheme = spunThemeThis.textContent;
+    arr.obgAll.obgSaveRest[0].thisVolum = soundOn;
 
     let objJson2 = JSON.stringify(localStorage);
     let objJson3 = JSON.parse(objJson2);

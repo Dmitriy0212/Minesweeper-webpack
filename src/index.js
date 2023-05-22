@@ -92,7 +92,19 @@ numberBombInput.className = 'box';
 menu.appendChild(numberBombInput)
 
 let bombInput = document.createElement('input');
+bombInput.type = 'number'
+bombInput.max = '99'
+bombInput.min = '10'
 bombInput.value = numberOfBomb
+bombInput.pattern = "[10-99]+"
+bombInput.addEventListener("change", () => {
+    if (bombInput.value > 99) {
+        bombInput.value = 99
+    }
+    if (bombInput.value < 10) {
+        bombInput.value = 10
+    }
+})
 spunBombIs.textContent = bombInput.value
 spunFregIs.textContent = 0
 numberBombInput.appendChild(bombInput)
@@ -264,6 +276,7 @@ buttonDeleteSave.addEventListener("click", () => {
         buttonDeleteSave.textContent = 'Sound on'
         soundOn = 1
     }
+    localStorageGetSave()
 })
 menu.appendChild(buttonDeleteSave)
 
@@ -280,6 +293,8 @@ spunTheme.addEventListener("click", () => {
         theme(buttonDeleteSave)
         theme(fild)
         theme(numberBombInput)
+        theme(pBombIs)
+        theme(pFregIs)
     }
     else if (spunLevel.classList.length > 1) {
         spunThemeThis.textContent = 'Dark'
@@ -293,7 +308,10 @@ spunTheme.addEventListener("click", () => {
         theme(buttonDeleteSave)
         theme(fild)
         theme(numberBombInput)
+        theme(pBombIs)
+        theme(pFregIs)
     }
+    localStorageGetSave()
 })
 
 export let timerId;
@@ -316,6 +334,28 @@ for (let key in obj2) {
         if (obj.obgAll.obgSaveRest[0].masBomb.length == 0) {
             mas = start(numberOfRows, numberOfBomb)
             break;
+        }
+        if (obj.obgAll.obgSaveRest[0].thisTheme.includes('Light')) {
+            spunThemeThis.textContent = 'Light'
+            theme(spunLevel)
+            theme(boxForNumberClicks)
+            theme(boxForTimer)
+            theme(buttonRest)
+            theme(buttonNew)
+            theme(spunTheme)
+            theme(spunStatistics)
+            theme(buttonDeleteSave)
+            theme(fild)
+            theme(numberBombInput)
+            theme(pBombIs)
+            theme(pFregIs)
+        }
+        soundOn = obj.obgAll.obgSaveRest[0].thisVolum
+        if (soundOn == 0) {
+            buttonDeleteSave.textContent = 'Sound off'
+        }
+        else if (soundOn == 1) {
+            buttonDeleteSave.textContent = 'Sound on'
         }
         spunBombIs.textContent = obj.obgAll.obgSaveRest[0].valueBomb
         spunFregIs.textContent = obj.obgAll.obgSaveRest[0].valueFleg

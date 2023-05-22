@@ -24,6 +24,7 @@ export default function startFromSave(arr1, arr2, arr3, rows, arr4) {
         if (Number(count) == a) {
           let button = document.createElement('button')
           button.oncontextmenu = "event.preventDefault()"
+          button.addEventListener("contextmenu", timerGame)
           if (arr4[count] == '') {
             button.textContent = String(arr1[count])
           }
@@ -31,8 +32,18 @@ export default function startFromSave(arr1, arr2, arr3, rows, arr4) {
             let obj1 = JSON.stringify(arr4[count]);
             let obj2 = JSON.parse(obj1);
             button.innerHTML = obj2
-            debugger
+            button.children[0].addEventListener("contextmenu", timerGame)
             button.children[0].addEventListener("contextmenu", function (event) {
+              let fild1 = document.querySelector('.fild')
+              for (let k = 0; k < fild1.children.length; k++) {
+                for (let r = 0; r < fild1.children[k].children.length; r++) {
+                  if(fild1.children[k].children[r].children[0]!==undefined){
+                    fild1.children[k].children[r].children[0].removeEventListener('contextmenu', timerGame);
+                  }
+                  fild1.children[k].children[r].removeEventListener('contextmenu', timerGame);
+                  fild1.children[k].children[r].removeEventListener('click', timerGame);
+                }
+              }
               localStorageGetSave()
               flegOffBomb(this.parentNode)
               if (soundOn == 1) {
@@ -49,6 +60,13 @@ export default function startFromSave(arr1, arr2, arr3, rows, arr4) {
           button.className = arr2[count]
           let img = document.createElement('img')
           button.addEventListener("contextmenu", function (event) {
+            let fild1 = document.querySelector('.fild')
+              for (let k = 0; k < fild1.children.length; k++) {
+                for (let r = 0; r < fild1.children[k].children.length; r++) {
+                  fild1.children[k].children[r].removeEventListener('contextmenu', timerGame);
+                  fild1.children[k].children[r].removeEventListener('click', timerGame);
+                }
+              }
             flegInBomb(this)
             if (soundOn == 1) {
               soundFlag()
@@ -63,7 +81,19 @@ export default function startFromSave(arr1, arr2, arr3, rows, arr4) {
             }
             localStorageGetSave()
           });
+          img.addEventListener("contextmenu", timerGame)
           img.addEventListener("contextmenu", function (event) {
+            let fild1 = document.querySelector('.fild')
+              for (let k = 0; k < fild1.children.length; k++) {
+                for (let r = 0; r < fild1.children[k].children.length; r++) {
+                  if(fild1.children[k].children[r].children[0]!==undefined){
+                    fild1.children[k].children[r].children[0].removeEventListener('contextmenu', timerGame);
+                  }
+                  debugger
+                  fild1.children[k].children[r].removeEventListener('contextmenu', timerGame);
+                  fild1.children[k].children[r].removeEventListener('click', timerGame);
+                }
+              }
             localStorageGetSave()
             flegOffBomb(this.parentNode)
             if (soundOn == 1) {

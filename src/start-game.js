@@ -39,7 +39,15 @@ export default function start(numberOfRows, numberOfBomb) {
       let button = document.createElement('button')
       button.oncontextmenu = "event.preventDefault()"
       let img = document.createElement('img')
+      button.addEventListener("contextmenu", timerGame)
       button.addEventListener("contextmenu", function (event) {
+        let fild1 = document.querySelector('.fild')
+        for (let k = 0; k < fild1.children.length; k++) {
+          for (let r = 0; r < fild1.children[k].children.length; r++) {
+            fild1.children[k].children[r].removeEventListener('contextmenu', timerGame);
+            fild1.children[k].children[r].removeEventListener('click', timerGame);
+          }
+        }
         flegInBomb(this)
         if (soundOn == 1) {
           soundFlag()

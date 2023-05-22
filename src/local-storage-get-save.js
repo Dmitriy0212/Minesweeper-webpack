@@ -4,9 +4,11 @@ import { numberClicks } from "./index";
 import ifLocalStorageLength from "./if-local-storage-length-0";
 import { spunBombIs } from "./index";
 import { spunFregIs } from "./index";
+import { spunThemeThis } from "./index";
+import { soundOn } from "./index";
 export default function localStorageGetSave() {
     let obgSaveForRes = {
-        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: ''
+        masBomb: [], masValue: [], colorValue: [], masStyle: [], time: '', clicks: '', numberRous: '', levelThis: '', masArt: [], valueBomb: '', valueFleg: '', thisTheme: '', thisVolum: ''
     }
     let arr1 = [];
     let arr2 = [];
@@ -44,6 +46,8 @@ export default function localStorageGetSave() {
     obgSaveForRes.masArt = arr2;
     obgSaveForRes.valueFleg = spunFregIs.textContent;
     obgSaveForRes.valueBomb = spunBombIs.textContent;
+    obgSaveForRes.thisTheme = spunThemeThis.textContent;
+    obgSaveForRes.thisVolum = soundOn;
 
 
 
